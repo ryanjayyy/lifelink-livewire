@@ -96,7 +96,7 @@
                         <div class="text-gray-500 text-center fw-semibold fs-6">
                             Not Registered yet?
 
-                            <a href="{{ route('guest.signup') }}"
+                            <a href="{{ route('members.signup') }}"
                                 class="link-primary">
                                 Sign up
                             </a>
