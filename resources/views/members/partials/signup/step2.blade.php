@@ -1,5 +1,5 @@
 <!--begin::Step 2-->
-<div class="flex-column" data-kt-stepper-element="content">
+<div class="flex-column">
 
     <!--begin::Input group-->
     <div class="fv-row mb-10">
@@ -85,7 +85,11 @@
         <div class="row g-2">
             <!--begin::Column for Sex-->
             <div class="col">
-                <input wire:model="sex" type="text" class="form-control form-control-solid" placeholder="Sex" />
+                <select wire:model="sex" type="text" class="form-control form-control-solid" placeholder="Sex">
+                    <option value="">Gender</option>
+                    <option value="1">Male</option>
+                    <option value="2">Female</option>
+                </select>
                 <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
                     @error('sex')
                         {{ $message }}
@@ -96,8 +100,18 @@
 
             <!--begin::Column for Blood Type-->
             <div class="col">
-                <input wire:model="blood_type" type="text" class="form-control form-control-solid"
-                    placeholder="Blood Type" />
+                <select wire:model="blood_type" type="text" class="form-control form-control-solid"
+                    placeholder="Blood Type">
+                    <option value="">Blood Type</option>
+                    <option value="A+">A+</option>
+                    <option value="B+">B+</option>
+                    <option value="AB+">AB+</option>
+                    <option value="O+">O+</option>
+                    <option value="A-">A-</option>
+                    <option value="B-">B-</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O-">O-</option>
+                </select>
                 <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
                     @error('blood_type')
                         {{ $message }}
@@ -174,8 +188,8 @@
     </div>
     <!--end::Input group-->
 
-     <!--begin::Input group-->
-     <div class="fv-row mb-10">
+    <!--begin::Input group-->
+    <div class="fv-row mb-10">
         <!--begin::Row-->
         <div class="row g-2">
             <!--begin::Column for Street-->

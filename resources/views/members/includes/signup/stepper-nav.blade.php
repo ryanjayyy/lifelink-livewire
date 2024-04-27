@@ -1,7 +1,7 @@
 <!--begin::Nav-->
 <div class="stepper-nav flex-center flex-wrap mb-10">
     <!--begin::Step 1-->
-    <div class="stepper-item mx-8 my-4 current" data-kt-stepper-element="nav">
+    <div class="stepper-item mx-8 my-4" data-kt-stepper-element="nav">
         <!--begin::Wrapper-->
         <div class="stepper-wrapper d-flex align-items-center">
             <!--begin::Icon-->
@@ -32,7 +32,7 @@
     <!--end::Step 1-->
 
     <!--begin::Step 2-->
-    <div class="stepper-item mx-8 my-4" data-kt-stepper-element="nav">
+    <div class="stepper-item mx-8 my-4 current" data-kt-stepper-element="nav">
         <!--begin::Wrapper-->
         <div class="stepper-wrapper d-flex align-items-center">
             <!--begin::Icon-->

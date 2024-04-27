@@ -8,7 +8,7 @@
 
         <!--begin::Input-->
         <input wire:model='email' type="email" class="form-control form-control-solid" placeholder="Email"
-            value="" />
+          >
         @error('email')
             <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
                 {{ $message }}

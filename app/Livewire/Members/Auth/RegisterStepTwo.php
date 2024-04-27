@@ -4,11 +4,8 @@ namespace App\Livewire\Members\Auth;
 
 use Livewire\Component;
 
-class Register extends Component
+class RegisterStepTwo extends Component
 {
-    public $email;
-    public $mobile;
-    public $password;
     public $first_name;
     public $middle_name;
     public $last_name;
@@ -22,20 +19,27 @@ class Register extends Component
     public $barangay;
     public $street;
     public $zip_code;
-    public $password_confirmation;
 
-
-    public function register()
+    public function render()
     {
-        $this->validate([
-            'email' => 'required|email',
-            'mobile' => 'required',
-            'password' => 'required|confirmed',
+        return view('members.pages.auth.signup-2')->extends('layouts.guest');
+    }
+
+    public function messages(): array
+    {
+        return [
+            'dob.before' => 'You must be at least 17 years old.',
+        ];
+    }
+
+
+    public function registerStepTwo()
+    {
+        $validatedData = $this->validate([
             'first_name' => 'required',
             'middle_name' => 'required',
             'last_name' => 'required',
-            'occupation' => 'required',
-            'dob' => 'required',
+            'dob' => ['required', 'date', 'before:-17 years'],
             'sex' => 'required',
             'blood_type' => 'required',
             'region' => 'required',
@@ -46,10 +50,8 @@ class Register extends Component
             'zip_code' => 'required',
         ]);
 
-    }
+        //save to database
 
-    public function render()
-    {
-        return view('members.pages.auth.signup')->extends('layouts.guest');
+        return redirect()->route('members.signup-verify');
     }
 }
