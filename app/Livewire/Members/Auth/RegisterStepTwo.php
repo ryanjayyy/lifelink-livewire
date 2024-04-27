@@ -5,6 +5,10 @@ namespace App\Livewire\Members\Auth;
 use Livewire\Component;
 use App\Models\User;
 use App\Models\MemberDetail;
+use App\Models\Barangay;
+use App\Models\Municipality;
+use App\Models\Province;
+use App\Models\Region;
 
 class RegisterStepTwo extends Component
 {
@@ -22,9 +26,40 @@ class RegisterStepTwo extends Component
     public $street;
     public $zip_code;
 
+    public $barangayList =[];
+    public $municipalityList =[];
+    public $provinceList = [];
+    public $regionList = [];
+
     public function render()
     {
         return view('members.pages.auth.signup-2')->extends('layouts.guest');
+    }
+
+    public function mount()
+    {
+        // $this->barangayList = Barangay::get();
+        // $this->municipalityList = Municipality::get();
+
+        $this->regionList = Region::get();
+        // $this->provinceList = Province::where('regCode', $this->region)->get();
+
+
+    }
+
+    public function getProvinceList()
+    {
+        $this->provinceList = Province::where('regCode', $this->region)->get();
+    }
+
+    public function getMunicipalityList()
+    {
+        $this->municipalityList = Municipality::where('provCode', $this->province)->get();
+    }
+
+    public function getBarangayList()
+    {
+        $this->barangayList = Barangay::where('citymunCode', $this->municipality)->get();
     }
 
     public function messages(): array

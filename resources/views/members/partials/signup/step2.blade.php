@@ -130,8 +130,12 @@
         <div class="row g-2">
             <!--begin::Column for Region-->
             <div class="col">
-                <input wire:model="region" type="text" class="form-control form-control-solid"
-                    placeholder="Region" />
+                <select wire:model="region" wire:change="getProvinceList" type="text" class="form-control form-control-solid" placeholder="Region">
+                    <option value="">Select Region</option>
+                    @foreach ($regionList as $region)
+                        <option value="{{ $region->regCode }}">{{ $region->regDesc }}</option>
+                    @endforeach
+                </select>
                 <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
                     @error('region')
                         {{ $message }}
@@ -142,13 +146,18 @@
 
             <!--begin::Column for Province-->
             <div class="col">
-                <input wire:model="province" type="text" class="form-control form-control-solid"
-                    placeholder="Province" />
-                <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
-                    @error('province')
-                        {{ $message }}
-                    @enderror
-                </div>
+                <select wire:model="province" wire:change="getMunicipalityList" type="text" class="form-control form-control-solid"
+                    placeholder="Province" >
+                    <option value="">Select Province</option>
+                    @foreach ($provinceList as $province)
+                        <option value="{{ $province->provCode }}">{{ $province->provDesc }}</option>
+                    @endforeach
+                </select>
+                    <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+                        @error('province')
+                            {{ $message }}
+                        @enderror
+                    </div>
             </div>
             <!--end::Column for Province-->
         </div>
@@ -162,8 +171,13 @@
         <div class="row g-2">
             <!--begin::Column for Municipality-->
             <div class="col">
-                <input wire:model="municipality" type="text" class="form-control form-control-solid"
-                    placeholder="Municipality" />
+                <select wire:model="municipality" wire:change="getBarangayList" type="text" class="form-control form-control-solid"
+                    placeholder="Municipality">
+                    <option value="">Select Municipality</option>
+                    @foreach ($municipalityList as $municipality)
+                        <option value="{{ $municipality->citymunCode }}">{{ $municipality->citymunDesc }}</option>
+                    @endforeach
+                </select>
                 <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
                     @error('municipality')
                         {{ $message }}
@@ -174,8 +188,13 @@
 
             <!--begin::Column for Barangay-->
             <div class="col">
-                <input wire:model="barangay" type="text" class="form-control form-control-solid"
-                    placeholder="Barangay" />
+                <select wire:model="barangay" type="text" class="form-control form-control-solid"
+                    placeholder="Barangay">
+                    <option value="">Select Barangay</option>
+                    @foreach ($barangayList as $barangay)
+                        <option value="{{ $barangay->brgyCode }}">{{ $barangay->brgyDesc }}</option>
+                    @endforeach
+                </select>
                 <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
                     @error('barangay')
                         {{ $message }}
