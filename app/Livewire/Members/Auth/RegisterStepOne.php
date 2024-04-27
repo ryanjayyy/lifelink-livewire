@@ -27,8 +27,8 @@ class RegisterStepOne extends Component
     public function registerStepOne()
     {
         $validatedData = $this->validate([
-            'email' => 'required|email',
-            'mobile' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'mobile' => 'required|unique:users,mobile',
             'password' => 'required|confirmed',
         ]);
 
