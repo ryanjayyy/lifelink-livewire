@@ -3,6 +3,7 @@
 namespace App\Livewire\Members\Auth;
 
 use Livewire\Component;
+
 use App\Models\User;
 use App\Models\MemberDetail;
 use App\Models\Barangay;
@@ -38,13 +39,7 @@ class RegisterStepTwo extends Component
 
     public function mount()
     {
-        // $this->barangayList = Barangay::get();
-        // $this->municipalityList = Municipality::get();
-
         $this->regionList = Region::get();
-        // $this->provinceList = Province::where('regCode', $this->region)->get();
-
-
     }
 
     public function getProvinceList()
@@ -93,9 +88,10 @@ class RegisterStepTwo extends Component
 
 
         $memberAccount = User::create([
+            'role_id' => 2,
             'email' => $email,
             'mobile' => $mobile,
-            'password' => bcrypt($password),
+            'password' => $password,
         ]);
 
         $memberDetail = MemberDetail::create([

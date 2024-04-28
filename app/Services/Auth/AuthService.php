@@ -21,7 +21,7 @@ class AuthService
         if ($success) {
             $unauthorizedAdminLogin = $userType === UserTypeEnum::ADMIN
                 && ! auth()->user()->isActiveUser();
-            $unauthorizedStaffLogin = $userType === UserTypeEnum::STAFF
+            $unauthorizedStaffLogin = $userType === UserTypeEnum::MEMBER
                 && ! auth()->user()->isActiveUser();
 
             if ($unauthorizedAdminLogin || $unauthorizedStaffLogin) {

@@ -32,6 +32,13 @@
                         </div>
                         <!--begin::Heading-->
 
+                        @error('login-status')
+                        <div class="alert alert-danger border-0 d-flex align-items-center justify-content-center">
+                            <div class="d-flex flex-column">
+                                <span>{{ $message }}</span>
+                            </div>
+                        </div>
+                        @enderror
                         <!--begin::Input group--->
                         <div class="fv-row mb-8 fv-plugins-icon-container">
                             <!--begin::Email-->

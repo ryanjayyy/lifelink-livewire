@@ -3,6 +3,7 @@
 namespace App\Livewire\Members\Auth;
 
 use Livewire\Component;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterStepOne extends Component
 {
@@ -35,7 +36,7 @@ class RegisterStepOne extends Component
         session([
             'email' => $validatedData['email'],
             'mobile' => $validatedData['mobile'],
-            'password' => bcrypt($validatedData['password']),
+            'password' => Hash::make($validatedData['password']),
         ]);
 
         return redirect()->route('members.signup-2');
