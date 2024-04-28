@@ -103,14 +103,14 @@
                 <select wire:model="blood_type" type="text" class="form-control form-control-solid"
                     placeholder="Blood Type">
                     <option value="">Blood Type</option>
-                    <option value="A+">A+</option>
-                    <option value="B+">B+</option>
-                    <option value="AB+">AB+</option>
-                    <option value="O+">O+</option>
-                    <option value="A-">A-</option>
-                    <option value="B-">B-</option>
-                    <option value="AB-">AB-</option>
-                    <option value="O-">O-</option>
+                    <option value="1">A+</option>
+                    <option value="2">B+</option>
+                    <option value="3">AB+</option>
+                    <option value="4">O+</option>
+                    <option value="5">A-</option>
+                    <option value="6">B-</option>
+                    <option value="7">AB-</option>
+                    <option value="8">O-</option>
                 </select>
                 <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
                     @error('blood_type')

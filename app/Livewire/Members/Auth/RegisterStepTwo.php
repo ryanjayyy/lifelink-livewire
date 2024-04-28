@@ -94,14 +94,19 @@ class RegisterStepTwo extends Component
             'password' => $password,
         ]);
 
+        do {
+            $donorNumber = rand(10000000, 99999999);
+        } while (MemberDetail::where('donor_number', $donorNumber)->exists());
+
         $memberDetail = MemberDetail::create([
             'user_id' => $memberAccount->id,
+            'donor_number' => $donorNumber,
             'first_name' => $validatedData['first_name'],
             'middle_name' => $validatedData['middle_name'],
             'last_name' => $validatedData['last_name'],
             'dob' => $validatedData['dob'],
-            'sex' => $validatedData['sex'],
-            'blood_type' => $validatedData['blood_type'],
+            'sex_id' => $validatedData['sex'],
+            'blood_type_id' => $validatedData['blood_type'],
             'region' => $validatedData['region'],
             'province' => $validatedData['province'],
             'municipality' => $validatedData['municipality'],

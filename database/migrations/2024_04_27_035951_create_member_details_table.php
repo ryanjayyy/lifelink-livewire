@@ -14,12 +14,13 @@ return new class extends Migration
         Schema::create('member_details', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('donor_number')->unique();
             $table->string('first_name');
             $table->string('middle_name');
             $table->string('last_name');
-            $table->string('sex');
+            $table->string('sex_id');
             $table->date('dob');
-            $table->string('blood_type');
+            $table->unsignedBigInteger('blood_type_id');
             $table->string('occupation')->nullable();
             $table->string('region');
             $table->string('province');
@@ -30,6 +31,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('blood_type_id')->references('id')->on('blood_types');
         });
 
 

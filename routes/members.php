@@ -8,6 +8,7 @@ use App\Livewire\Members\Auth\EmailVerification;
 
 
 Route::name('members.')->group(function () {
+
     Route::get('/signin', Login::class)->name('signin');
     Route::get('/signup/step-1', RegisterStepOne::class)->name('signup-1');
     Route::get('/signup/step-2', RegisterStepTwo::class)->name('signup-2');

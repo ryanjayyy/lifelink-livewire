@@ -17,5 +17,19 @@ class DefaultSeeder extends Seeder
             ['role' => 'Admin'],
             ['role' => 'Member'],
         ]);
+        DB::table('sexes')->insert([
+            ['sex' => 'Male'],
+            ['sex' => 'female'],
+        ]);
+        DB::table('blood_types')->insert([
+            ['blood_type' => 'A+'],
+            ['blood_type' => 'B+'],
+            ['blood_type' => 'AB+'],
+            ['blood_type' => 'O+'],
+            ['blood_type' => 'A-'],
+            ['blood_type' => 'B-'],
+            ['blood_type' => 'AB-'],
+            ['blood_type' => 'O-'],
+        ]);
     }
 }

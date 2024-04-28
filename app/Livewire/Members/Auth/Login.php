@@ -35,7 +35,7 @@ class Login extends Component
             $ipwhois = json_decode(curl_exec($ch), true);
             curl_close($ch);
 
-            if ($user->role_id == 2) {
+            if ($user->role_id == 1) {
 
                 AuditTrail::create([
                     'user_id'    => $user->id,
@@ -50,7 +50,7 @@ class Login extends Component
                     'longitude'  => $ipwhois['longitude'],
                 ]);
 
-                return redirect()->route('admin.dashboard');
+                return redirect()->route('admin.dashboard.dashboard');
             } else {
                 AuditTrail::create([
                     'user_id'    => $user->id,
