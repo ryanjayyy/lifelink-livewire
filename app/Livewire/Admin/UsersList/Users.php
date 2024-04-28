@@ -144,42 +144,44 @@ class Users extends Table
                 }
             )->setFilterSelection($bloodType),
 
-            Column::create('click_id', 'click_id', 'Actions', FilterTypeEnum::NONE, null, function ($value) {
+            Column::create('click_id', 'click_id', '', FilterTypeEnum::NONE, null, function ($value) {
                 // $editRoute = route('admin.users.edit', ['user' => $value]);
                 // $deleteRoute = route('admin.users.delete', ['employee' => $value]);
 
                 $deleteRoute = '#';
 
                 return <<<HTML
-                    <a href="#" class="btn btn-primary text-white px-2"
-                        data-bs-toggle="tooltip"
-                        data-bs-placement="bottom"
-                        title="Edit">
-                        <i class="fa fa-edit ms-1"></i>
-                    </a>
-                    <a href="#" class="btn btn-primary text-white px-2"
-                        data-bs-toggle="tooltip"
-                        data-bs-placement="bottom"
-                        title="View">
-                        <i class="fa fa-edit ms-1"></i>
-                    </a>
-                    <a href="#" class="btn btn-primary text-white px-2"
-                        data-bs-toggle="tooltip"
-                        data-bs-placement="bottom"
-                        title="Add Blood Bag">
-                        <i class="fa fa-add ms-1"></i>
-                    </a>
-                    <a href="javascript:"
-                        class="btn btn-danger text-white px-3"
-                        data-bs-toggle="tooltip"
-                        data-bs-placement="bottom"
-                        title="Move to deferral">
-                        <!-- <i class="fa fa-remove ms-1"></i> -->
-                        <i class="ki-duotone ki-arrow-right-left">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
-                    </a>
+                    <div class="d-flex justify-content-center gap-4">
+                        <a href="#" class="btn btn-primary text-white px-2"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="bottom"
+                            title="Edit">
+                            <i class="fa fa-edit ms-1"></i>
+                        </a>
+                        <a href="#" class="btn btn-primary text-white px-2"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="bottom"
+                            title="View">
+                            <i class="fa fa-eye ms-1"></i>
+                        </a>
+                        <a href="#" class="btn btn-primary text-white px-2"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="bottom"
+                            title="Add Blood Bag">
+                            <i class="fa fa-add ms-1"></i>
+                        </a>
+                        <a href="javascript:"
+                            class="btn btn-danger text-white px-3"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="bottom"
+                            title="Move to deferral">
+                            <!-- <i class="fa fa-remove ms-1"></i> -->
+                            <i class="ki-duotone ki-arrow-right-left">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>
+                        </a>
+                    </div>
                 HTML;
             }),
         ];

@@ -33,12 +33,12 @@
         </div>
 
         <div class="table-generic table-responsive floating-scroll mt-5">
-            <table class="table table-striped table-generic table-bordered">
-                <thead>
+            <table class="table table-striped table-hover table-sm table-bordered">
+                <thead class="thead-dark text-center">
                     <x-dynamic-component :component="$this->headerComponent" :columns="$this->columns" :filters="$this->filters" :sorting="$this->sorting">
                     </x-dynamic-component>
                 </thead>
-                <tbody class="table-bordered">
+                <tbody class="table-bordered text-center">
                     <x-dynamic-component :component="$this->columnComponent" :columns="$this->columns" :data="$this->getData()">
                     </x-dynamic-component>
                 </tbody>
@@ -189,4 +189,3 @@
         });
     </script>
 @endsection
-
