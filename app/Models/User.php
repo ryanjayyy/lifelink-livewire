@@ -51,7 +51,8 @@ class User extends Authenticatable
         'email',
         'mobile',
         'password',
-        'unhash_password'
+        'unhash_password',
+        'isDeferred'
     ];
 
     /**

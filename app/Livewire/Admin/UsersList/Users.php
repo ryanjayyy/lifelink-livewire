@@ -45,6 +45,7 @@ class Users extends Table
                 'users.id as click_id',
                 'users.email as email',
                 'users.mobile as mobile',
+                'users.isDeferred as isDeferred',
                 'sexes.sex as sex',
                 'sexes.id as sex_id',
                 DB::raw("CONCAT(member_details.first_name, ' ', member_details.middle_name, ' ', member_details.last_name) as full_name"),
@@ -152,10 +153,11 @@ class Users extends Table
             )->setFilterSelection($bloodType),
 
             Column::create('click_id', 'click_id', '', FilterTypeEnum::NONE, null, function ($value) {
-                // $editRoute = route('admin.users.edit', ['user' => $value]);
-                // $deleteRoute = route('admin.users.delete', ['employee' => $value]);
-
-                $deleteRoute = '#';
+                $user = User::where('id', $value)->first();
+                $isDeferred = $user->isDeferred;
+                $disabledClass = $isDeferred ? ' disabled btn-danger' : ' btn-primary';
+                $iconClass = $isDeferred ? 'fa fa-ban ms-1' : 'fa fa-add ms-1';
+                $disabledAttr = $isDeferred ? ' aria-disabled="true" tabindex="-1"' : '';
 
                 return <<<HTML
                     <div class="d-flex justify-content-center gap-4">
@@ -173,20 +175,19 @@ class Users extends Table
                             title="View">
                             <i class="fa fa-eye ms-1"></i>
                         </a>
-                        <a  wire:click="dispatchId({$value})" class="btn btn-primary text-white px-2"
+                        <a wire:click="dispatchId({$value})" class="btn text-white px-2{$disabledClass}"
                             data-bs-toggle="modal"
                             data-bs-target="#add-blood-bag"
                             data-bs-placement="bottom"
-                            title="Add Blood Bag">
-                            <i class="fa fa-add ms-1"></i>
+                            title="Add Blood Bag"{$disabledAttr}>
+                            <i class="{$iconClass}"></i>
                         </a>
-                        <a href="javascript:"
+                        <a wire:click="dispatchId({$value})"
                             class="btn btn-danger text-white px-3"
                             data-bs-toggle="modal"
                             data-bs-target="#move-to-deferral"
                             data-bs-placement="bottom"
                             title="Move to deferral">
-                            <!-- <i class="fa fa-remove ms-1"></i> -->
                             <i class="ki-duotone ki-arrow-right-left">
                                 <span class="path1"></span>
                                 <span class="path2"></span>

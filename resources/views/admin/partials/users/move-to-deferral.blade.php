@@ -12,7 +12,7 @@
             </div>
 
             <div class="modal-body">
-                <form wire:submit.prevent='saveBloodBag' class="form">
+                <form wire:submit.prevent='addToDeferralList' class="form">
                     @csrf
                     <div class="row">
                         <div class="col-12">
@@ -45,10 +45,11 @@
                                 </div>
                                 <div class="my-4">
                                     <label class="form-label">Deferral Type</label>
-                                    <select wire:model='deferralType' class="form-select form-select-solid">
-                                        <option value="">1</option>
-                                        <option value="">2</option>
-
+                                    <select wire:model='deferralType' wire:change="getCategoryList" class="form-select form-select-solid">
+                                        <option value="">Select Deferral Type</option>
+                                        @foreach ($deferralTypeList as $deferralType)
+                                            <option value="{{ $deferralType->id }}">{{ $deferralType->type }}</option>
+                                        @endforeach
                                     </select>
                                     @error('deferralType')
                                         <div
@@ -59,10 +60,11 @@
                                 </div>
                                 <div class="my-4">
                                     <label class="form-label">Category</label>
-                                    <select wire:model='deferralCategory' class="form-select form-select-solid">
-                                        <option value="">1</option>
-                                        <option value="">2</option>
-
+                                    <select wire:model='deferralCategory' wire:change='inputOtherReason' class="form-select form-select-solid">
+                                        <option value="">Select Category</option>
+                                        @foreach ($deferralCategoryList as $deferralCategory )
+                                            <option value="{{ $deferralCategory->id }}">{{ $deferralCategory->category }}</option>
+                                        @endforeach
                                     </select>
                                     @error('deferralCategory')
                                         <div
@@ -71,6 +73,20 @@
                                         </div>
                                     @enderror
                                 </div>
+
+                                @if($isOtherReason)
+                                    <div class="my-4">
+                                        <label class="form-label">Reason</label>
+                                        <input wire:model='otherReason' type="text" class="form-control form-control-solid" />
+                                        @error('otherReason')
+                                            <div
+                                                class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                @endif
+
                                 <div class="my-4">
                                     <label class="form-label">Donation Type</label>
                                     <select wire:model='donationType' class="form-select form-select-solid">
@@ -87,6 +103,26 @@
                                         </div>
                                     @enderror
                                 </div>
+                                @if ($isDuration)
+                                    <div class="my-4">
+                                        <label class="form-label">Duration Days</label>
+                                        <div class="input-group">
+                                            <button class="btn btn-outline-secondary" type="button" id="button-addon1" wire:click="decrementDuration">
+                                                <i class="bi bi-dash-circle"></i>
+                                            </button>
+                                            <input wire:model='duration' type="number" class="form-control" aria-label="Duration" aria-describedby="button-addon1" maxlength="3" max="999" oninput="this.value = this.value.slice(0, 3) || ''">
+                                            <button class="btn btn-outline-secondary" type="button" id="button-addon2" wire:click="incrementDuration">
+                                                <i class="bi bi-plus-circle"></i>
+                                            </button>
+                                        </div>
+                                        @error('duration')
+                                            <div
+                                                class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                </div>
+                                @endif
                             </div>
                         </div>
                     </div>
