@@ -19,6 +19,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('isDeferred')->default(false);
+            $table->boolean('isDonor')->default(false);
             $table->string('unhash_password')->nullable();
             $table->rememberToken();
             $table->timestamps();

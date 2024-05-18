@@ -57,5 +57,16 @@ class DefaultSeeder extends Seeder
             ['deferral_type_id' => 2, 'category' => 'syphilis'],
             ['deferral_type_id' => 2, 'category' => 'Other reasons'],
         ]);
+        DB::table('badge_types')->insert([
+            ['type' => 'bronze', 'min_donated' => 2],
+            ['type' => 'silver', 'min_donated' => 4],
+            ['type' => 'gold', 'min_donated' => 8],
+        ]);
+        DB::table('donor_types')->insert([
+            ['type' => 'First Time', 'status' => '1'],
+            ['type' => 'Regular', 'status' => '1'],
+            ['type' => 'Lapsed', 'status' => '1'],
+            ['type' => 'Galloneer', 'status' => '1'],
+        ]);
     }
 }

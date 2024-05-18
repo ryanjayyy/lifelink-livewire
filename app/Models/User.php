@@ -52,7 +52,8 @@ class User extends Authenticatable
         'mobile',
         'password',
         'unhash_password',
-        'isDeferred'
+        'isDeferred',
+        'isDonor'
     ];
 
     /**

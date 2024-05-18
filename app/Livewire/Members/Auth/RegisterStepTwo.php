@@ -103,9 +103,9 @@ class RegisterStepTwo extends Component
         MemberDetail::create([
             'user_id' => $memberAccount->id,
             'donor_number' => $donorNumber,
-            'first_name' => $validatedData['first_name'],
-            'middle_name' => $validatedData['middle_name'],
-            'last_name' => $validatedData['last_name'],
+            'first_name' => ucwords($validatedData['first_name']),
+            'middle_name' => ucwords($validatedData['middle_name']),
+            'last_name' => ucwords($validatedData['last_name']),
             'dob' => $validatedData['dob'],
             'sex_id' => $validatedData['sex'],
             'blood_type_id' => $validatedData['blood_type'],
@@ -113,7 +113,7 @@ class RegisterStepTwo extends Component
             'province' => $validatedData['province'],
             'municipality' => $validatedData['municipality'],
             'barangay' => $validatedData['barangay'],
-            'street' => $validatedData['street'],
+            'street' => ucwords($validatedData['street']),
             'zip_code' => $validatedData['zip_code'],
         ]);
 

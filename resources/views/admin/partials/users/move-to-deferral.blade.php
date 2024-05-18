@@ -107,7 +107,7 @@
                                     <div class="my-4">
                                         <label class="form-label">Duration Days</label>
                                         <div class="input-group">
-                                            <button class="btn btn-outline-secondary" type="button" id="button-addon1" wire:click="decrementDuration">
+                                            <button w class="btn btn-outline-secondary" type="button" id="button-addon1" wire:click="decrementDuration">
                                                 <i class="bi bi-dash-circle"></i>
                                             </button>
                                             <input wire:model='duration' type="number" class="form-control" aria-label="Duration" aria-describedby="button-addon1" maxlength="3" max="999" oninput="this.value = this.value.slice(0, 3) || ''">

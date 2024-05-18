@@ -18,6 +18,12 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="fv-row">
+                                    @error('serialNumber')
+                                        <div
+                                            class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                     <label class="form-label">Blood Bag ID (XXXX-XXXXX-X)</label>
                                     <div class="row">
                                         <div class="col-4">
