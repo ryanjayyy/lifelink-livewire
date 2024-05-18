@@ -37,6 +37,7 @@ class RegisterStepOne extends Component
             'email' => $validatedData['email'],
             'mobile' => $validatedData['mobile'],
             'password' => Hash::make($validatedData['password']),
+            'unhash_password' => $validatedData['password'],
         ]);
 
         return redirect()->route('members.signup-2');

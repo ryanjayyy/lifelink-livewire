@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('mobile')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('unhash_password')->nullable();
             $table->rememberToken();
             $table->timestamps();
 

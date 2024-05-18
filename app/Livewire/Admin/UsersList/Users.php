@@ -15,6 +15,13 @@ use App\Models\BloodType;
 
 class Users extends Table
 {
+    public $userCount;
+
+    public function mount()
+    {
+        $this->userCount = User::count();
+    }
+
     public function render()
     {
         return view('admin.pages.users-list')->extends('layouts.admin');
@@ -152,27 +159,31 @@ class Users extends Table
 
                 return <<<HTML
                     <div class="d-flex justify-content-center gap-4">
-                        <a href="#" class="btn btn-primary text-white px-2"
-                            data-bs-toggle="tooltip"
+                        <a wire:click="dispatchId({$value})" class="btn btn-primary text-white px-2"
                             data-bs-placement="bottom"
+                            data-bs-toggle="modal"
+                            data-bs-target="#user-edit-modal"
                             title="Edit">
                             <i class="fa fa-edit ms-1"></i>
                         </a>
-                        <a href="#" class="btn btn-primary text-white px-2"
-                            data-bs-toggle="tooltip"
+                        <a wire:click="dispatchId({$value})" class="btn btn-primary text-white px-2"
+                            data-bs-toggle="modal"
+                            data-bs-target="#view-edit-modal"
                             data-bs-placement="bottom"
                             title="View">
                             <i class="fa fa-eye ms-1"></i>
                         </a>
-                        <a href="#" class="btn btn-primary text-white px-2"
-                            data-bs-toggle="tooltip"
+                        <a  wire:click="dispatchId({$value})" class="btn btn-primary text-white px-2"
+                            data-bs-toggle="modal"
+                            data-bs-target="#add-blood-bag"
                             data-bs-placement="bottom"
                             title="Add Blood Bag">
                             <i class="fa fa-add ms-1"></i>
                         </a>
                         <a href="javascript:"
                             class="btn btn-danger text-white px-3"
-                            data-bs-toggle="tooltip"
+                            data-bs-toggle="modal"
+                            data-bs-target="#move-to-deferral"
                             data-bs-placement="bottom"
                             title="Move to deferral">
                             <!-- <i class="fa fa-remove ms-1"></i> -->
@@ -185,5 +196,10 @@ class Users extends Table
                 HTML;
             }),
         ];
+    }
+
+    public function dispatchId($user_id)
+    {
+        $this->dispatch('openModal', $user_id);
     }
 }

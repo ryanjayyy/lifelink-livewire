@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use App\Enums\Role\RoleEnum;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property int $role_id
@@ -51,6 +51,7 @@ class User extends Authenticatable
         'email',
         'mobile',
         'password',
+        'unhash_password'
     ];
 
     /**
