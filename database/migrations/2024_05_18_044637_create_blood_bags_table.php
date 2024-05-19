@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('venue_id');
             $table->unsignedBigInteger('bled_by_id');
             //$table->unsignedBigInteger('patient_receivers_id');
-            $table->string('serial_no');
+            $table->string('serial_no')->unique();
             $table->date('date_donated');
             $table->date('expiration_date');
             $table->boolean('isCollected')->default(True);

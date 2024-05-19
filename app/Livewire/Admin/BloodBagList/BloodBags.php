@@ -2,7 +2,6 @@
 
 namespace App\Livewire\Admin\BloodBagList;
 
-use Livewire\Component;
 use App\Livewire\Table;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;

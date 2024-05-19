@@ -6,6 +6,7 @@ use App\Livewire\Admin\UsersList\Users;
 use App\Livewire\Admin\DonorList\Donors;
 use App\Livewire\Admin\Dashboard\Main;
 use App\Livewire\Admin\BloodBagList\BloodBags;
+use App\Livewire\Admin\Inventory\Main as Inventory;
 
 
 Route::name('admin.')->group(function () {
@@ -24,5 +25,9 @@ Route::name('admin.')->group(function () {
 
     Route::prefix('/blood-bag')->name('blood-bag.')->group(function () {
         Route::get('/list', BloodBags::class)->name('list');
+    });
+
+    Route::prefix('/inventory')->name('inventory.')->group(function () {
+        Route::get('/list', Inventory::class)->name('list');
     });
 });
