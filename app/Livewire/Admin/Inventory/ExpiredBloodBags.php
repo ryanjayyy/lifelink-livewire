@@ -13,24 +13,17 @@ use Carbon\Carbon;
 use App\Models\BloodBag;
 use App\Models\BloodType;
 
-class Main extends Table
+class ExpiredBloodBags extends Table
 {
-    public $stockCount;
-
+    public $expiredCount;
     public function mount()
     {
-        $this->stockCount = BloodBag::where('isCollected', 1)
-            ->where('isStored', 1)
-            ->where('isUsed', 0)
-            ->where('isExpired', 0)
-            ->where('isDisposed', 0)
-            ->where('isUnsafe', 0)
-            ->count();
+        $this->expiredCount = BloodBag::where('isExpired', 1)->where('isDisposed', 0)->count();
     }
 
     public function render()
     {
-        return view('admin.pages.inventory.inventory')->extends('layouts.admin');
+        return view('admin.pages.inventory.expired')->extends('layouts.admin');
     }
 
     public function uniqueRowId(): string
@@ -61,30 +54,19 @@ class Main extends Table
                 'member_details.donor_number as donor_number',
                 'member_details.blood_type_id as blood_type_id',
                 'blood_types.blood_type as blood_type',
-                DB::raw('DATEDIFF(blood_bags.expiration_date, NOW()) as remaining_days'),
-                DB::raw('
-                    CASE
-                        WHEN DATEDIFF(blood_bags.expiration_date, NOW()) <= 7 THEN "High Priority"
-                        WHEN DATEDIFF(blood_bags.expiration_date, NOW()) <= 14 THEN "Medium Priority"
-                        ELSE "Low Priority"
-                    END as priority
-                ')
             ])
             ->leftJoin('venues', 'venues.id', '=', 'blood_bags.venue_id')
             ->leftJoin('bled_by', 'bled_by.id', '=', 'blood_bags.bled_by_id')
             ->leftJoin('member_details', 'blood_bags.user_id', '=', 'member_details.user_id')
             ->leftJoin('blood_types', 'member_details.blood_type_id', '=', 'blood_types.id')
-            ->where('blood_bags.isCollected', '=', 1)
-            ->where('blood_bags.isStored', '=', 1)
-            ->where('blood_bags.isUsed', '=', 0)
-            ->where('blood_bags.isExpired', '=', 0)
+            ->where('blood_bags.isExpired', '=', 1)
             ->where('blood_bags.isDisposed', '=', 0)
             ->where('blood_bags.isUnsafe', '=', 0)
             ->limit(500);
 
         return DB::table(DB::raw('(' . $sub->toSql() . ') as customer_list'))
             ->mergeBindings($sub->getQuery())
-            ->orderBy('remaining_days', 'asc')
+            ->orderBy('expiration_date', 'asc')
             ->select('*');
     }
 
@@ -150,62 +132,22 @@ class Main extends Table
                     return "<a class='text-gray-800 text-hover-primary fw-bold'>{$value}</a>";
                 }
             ),
-            Column::create(
-                'remaining_days',
-                'remaining_days',
-                'Remaining Days',
-                FilterTypeEnum::NONE,
-                null,
-                function ($value) {
-                    return "<a class='text-gray-800 text-hover-primary fw-bold'>{$value} days</a>";
-                }
-            ),
-            Column::create(
-                'priority',
-                'priority',
-                'Priority',
-                FilterTypeEnum::NONE,
-                null,
-                function ($value) {
-                    $class = '';
-                    if ($value == 'High Priority') {
-                        $class = 'badge badge-danger';
-                    } elseif ($value == 'Medium Priority') {
-                        $class = 'badge badge-warning';
-                    } else {
-                        $class = 'badge badge-success';
-                    }
-                    return "<span class='{$class}'>{$value}</span>";
-                }
-            ),
             Column::create('click_id', 'click_id', '', FilterTypeEnum::NONE, null, function ($value) {
-                $bag = BloodBag::where('id', $value)->first();
 
                 return <<<HTML
                 <div class="d-flex justify-content-center gap-4">
 
-                    <a wire:click="dispatchId({$value})" class="btn btn-primary text-white px-2"
+                    <a wire:click="dispatchId({$value})" class="btn btn-danger text-white px-2"
                         data-bs-toggle="modal"
-                        data-bs-target="#undo-modal"
+                        data-bs-target="#disposed-modal"
                         data-bs-placement="bottom"
-                        title="Undo">
-                        <i class="ki-duotone ki-eraser ms-1 fs-4">
+                        title="Dispose">
+                        <i class="ki-duotone ki-trash ms-1">
                         <span class="path1"></span>
                         <span class="path2"></span>
                         <span class="path3"></span>
-                        </i>
-                    </a>
-
-                    <a wire:click="dispatchId({$value})"
-                        class="btn btn-primary text-white px-3"
-                        data-bs-toggle="modal"
-                        data-bs-target="#dispense-modal"
-                        data-bs-placement="bottom"
-                        title="Dispense">
-                        <i class="ki-duotone ki-courier ms-1 fs-4">
-                        <span class="path1"></span>
-                        <span class="path2"></span>
-                        <span class="path3"></span>
+                        <span class="path4"></span>
+                        <span class="path5"></span>
                         </i>
                     </a>
                 </div>

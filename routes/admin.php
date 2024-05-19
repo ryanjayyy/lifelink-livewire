@@ -7,6 +7,9 @@ use App\Livewire\Admin\DonorList\Donors;
 use App\Livewire\Admin\Dashboard\Main;
 use App\Livewire\Admin\BloodBagList\BloodBags;
 use App\Livewire\Admin\Inventory\Main as Inventory;
+use App\Livewire\Admin\Inventory\ExpiredBloodBags;
+use App\Livewire\Admin\Inventory\ReactiveBloodBag;
+use App\Livewire\Admin\Inventory\SpoiledBloodBag;
 
 
 Route::name('admin.')->group(function () {
@@ -29,5 +32,10 @@ Route::name('admin.')->group(function () {
 
     Route::prefix('/inventory')->name('inventory.')->group(function () {
         Route::get('/list', Inventory::class)->name('list');
+        Route::get('/expired', ExpiredBloodBags::class)->name('expired');
+        Route::get('/reactive', ReactiveBloodBag::class)->name('reactive');
+        Route::get('/spoiled', SpoiledBloodBag::class)->name('spoiled');
+
     });
 });
+
