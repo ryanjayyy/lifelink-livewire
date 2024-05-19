@@ -18,14 +18,16 @@ return new class extends Migration
             $table->string('middle_name');
             $table->string('last_name');
             $table->date('dob');
-            $table->string('gender');
+            $table->unsignedBigInteger('sex_id');
             $table->unsignedBigInteger('blood_type_id');
             $table->string('diagnosis');
-            $table->string('hospital');
+            $table->unsignedBigInteger('hospital_id');
             $table->timestamps();
 
             $table->foreign('blood_type_id')->references('id')->on('blood_types');
             $table->foreign('blood_bag_id')->references('id')->on('blood_bags');
+            $table->foreign('hospital_id')->references('id')->on('hospitals');
+            $table->foreign('sex_id')->references('id')->on('sexes');
         });
     }
 

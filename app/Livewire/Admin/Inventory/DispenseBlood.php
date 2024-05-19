@@ -83,10 +83,10 @@ class DispenseBlood extends Component
             'middle_name' => ucwords($this->middle_name),
             'last_name' => ucwords($this->last_name),
             'dob' => $this->dob,
-            'sex' => $this->sex,
-            'blood_type' => $this->blood_type,
+            'sex_id' => $this->sex,
+            'blood_type_id' => $this->blood_type,
             'diagnosis' => ucwords($this->diagnosis),
-            'hospital' => $this->hospital
+            'hospital_id' => $this->hospital
         ]);
 
         dd("saved");
