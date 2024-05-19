@@ -77,6 +77,10 @@ class DispenseBlood extends Component
             'hospital' => 'required',
         ]);
 
+        BloodBag::where('blood_bags.id', $this->bagId)->update([
+            'isUsed' => 1
+        ]);
+
         DispenseList::create([
             'blood_bag_id' => $this->bagId,
             'first_name' => ucwords($this->first_name),

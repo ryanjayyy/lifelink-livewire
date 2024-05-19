@@ -63,6 +63,7 @@ class Main extends Table
             ->leftJoin('blood_types', 'member_details.blood_type_id', '=', 'blood_types.id')
             ->where('blood_bags.isCollected', '=', 1)
             ->where('blood_bags.isStored', '=', 1)
+            ->where('blood_bags.isUsed', '=', 0)
             ->where('blood_bags.isExpired', '=', 0)
             ->where('blood_bags.isDisposed', '=', 0)
             ->where('blood_bags.isUnsafe', '=', 0)
