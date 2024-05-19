@@ -18,7 +18,10 @@ class ReactiveBloodBag extends Table
     public $reactiveCount;
     public function mount()
     {
-        $this->reactiveCount = UnsafeBloodBags::where('reason_id', 1)->count();
+        $this->reactiveCount = UnsafeBloodBags::where('reason_id', 1)
+            ->where('blood_bags.isDisposed', false)
+            ->leftJoin('blood_bags', 'blood_bags.id', '=', 'unsafe_blood_bags.blood_bag_id')
+            ->count();
     }
     public function render()
     {

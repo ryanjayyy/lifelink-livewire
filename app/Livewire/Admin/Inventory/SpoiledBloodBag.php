@@ -18,7 +18,10 @@ class SpoiledBloodBag extends Table
 
     public function mount()
     {
-        $this->spoiledCount = UnsafeBloodBags::where('reason_id', 2)->count();
+        $this->spoiledCount = UnsafeBloodBags::where('reason_id', 2)
+            ->where('blood_bags.isDisposed', false)
+            ->leftJoin('blood_bags', 'blood_bags.id', '=', 'unsafe_blood_bags.blood_bag_id')
+            ->count();
     }
 
     public function render()

@@ -14,13 +14,13 @@
     <!--end::Nav item-->
     <!--begin::Nav item-->
     <li class="nav-item mt-2">
-        <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ Route::is('admin.inventory.reactive') ? 'active' : 'nav-item' }}" href="{{ route('admin.inventory.reactive') }}">
+        <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ Route::is('admin.inventory.secure.reactive') ? 'active' : 'nav-item' }}" href="{{ route('admin.inventory.secure.pin') }}/reactive">
             Reactive Blood Bags </a>
     </li>
     <!--end::Nav item-->
     <!--begin::Nav item-->
     <li class="nav-item mt-2">
-        <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ Route::is('admin.inventory.spoiled') ? 'active' : 'nav-item' }}" href="{{ route('admin.inventory.spoiled') }}">
+        <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ Route::is('admin.inventory.secure.spoiled') ? 'active' : 'nav-item' }}" href="{{ route('admin.inventory.secure.pin') }}/spoiled">
             Spoiled Blood Bags </a>
     </li>
     <!--end::Nav item-->
