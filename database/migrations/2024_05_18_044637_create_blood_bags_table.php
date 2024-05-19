@@ -26,6 +26,7 @@ return new class extends Migration
             $table->boolean('isStored')->default(false);
             $table->boolean('isUsed')->default(false);
             $table->boolean('isExpired')->default(false);
+            $table->boolean('isUnsafe')->default(false);
             $table->boolean('isDisposed')->default(false);
             $table->date('dispensed_date')->nullable(true);
             $table->timestamps();

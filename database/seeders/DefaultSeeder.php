@@ -38,6 +38,13 @@ class DefaultSeeder extends Seeder
         DB::table('venues')->insert([
             ['name' => 'Alert', 'region' => 13, 'province' => 1375, 'municipality' => 137504, 'barangay' => 137504017, 'street' => '121 Alert Compunt', 'zip_code' => '3232'],
         ]);
+        DB::table('hospitals')->insert([
+            ['name' => 'Dalandan Hospital', 'region' => 13, 'province' => 1375, 'municipality' => 137504, 'barangay' => 137504017, 'street' => '121 Alert Compunt', 'zip_code' => '3232'],
+        ]);
+        DB::table('unsafe_reasons')->insert([
+            ['reason' => 'Reactive Blood Bag'],
+            ['reason' => 'Spoiled Blood Bag'],
+        ]);
         DB::table('donation_types')->insert([
             ['type' => 'Non-Patient Blood Donation'],
             ['type' => 'Direct-Patient Blood Donation'],
@@ -54,8 +61,11 @@ class DefaultSeeder extends Seeder
         DB::table('deferral_categories')->insert([
             ['deferral_type_id' => 2, 'category' => 'HIV'],
             ['deferral_type_id' => 2, 'category' => 'Hepatitis'],
-            ['deferral_type_id' => 2, 'category' => 'syphilis'],
-            ['deferral_type_id' => 2, 'category' => 'Other reasons'],
+            ['deferral_type_id' => 2, 'category' => 'Hepa B'],
+            ['deferral_type_id' => 2, 'category' => 'Hepa C'],
+            ['deferral_type_id' => 2, 'category' => 'Syphilis'],
+            ['deferral_type_id' => 2, 'category' => 'Other reasons'
+        ],
         ]);
         DB::table('badge_types')->insert([
             ['type' => 'bronze', 'min_donated' => 2],

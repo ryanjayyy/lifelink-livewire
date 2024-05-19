@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Admin\UsersList\Users;
 use App\Livewire\Admin\DonorList\Donors;
 use App\Livewire\Admin\Dashboard\Main;
+use App\Livewire\Admin\BloodBagList\BloodBags;
+
 
 Route::name('admin.')->group(function () {
 
@@ -18,5 +20,9 @@ Route::name('admin.')->group(function () {
 
     Route::prefix('/donors')->name('donors.')->group(function () {
         Route::get('/list', Donors::class)->name('list');
+    });
+
+    Route::prefix('/blood-bag')->name('blood-bag.')->group(function () {
+        Route::get('/list', BloodBags::class)->name('list');
     });
 });

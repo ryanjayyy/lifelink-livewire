@@ -22,6 +22,7 @@ class BloodBag extends Model
         'isStored',
         'isUsed',
         'isExpired',
+        'isUnsafe',
         'dispensed_date',
     ];
 }
