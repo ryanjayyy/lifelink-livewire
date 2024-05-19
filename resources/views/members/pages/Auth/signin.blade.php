@@ -4,22 +4,20 @@
 
 <div class="d-flex flex-column flex-root" id="kt_app_root">
     <!--begin::Authentication - Sign-in -->
-    <div class="d-flex flex-column flex-lg-row flex-column-fluid" style="background-image: url('assets/media/public/general_bg.png'); background-size: cover; background-position: center">
+    <div class="d-flex flex-column flex-lg-row flex-column-fluid" style="background-image: url('assets/media/public/general_bg.png'); background-size: cover; background-position: center;">
         <div class="position-absolute top-0 start-0 p-3">
             <a href="" class="btn btn-dark btn-sm">
                 <i class="bi bi-arrow-left"></i>
             </a>
-        </div>    
+        </div>
         <!--begin::Body-->
-        <div class="d-flex flex-column flex-lg-row-fluid w-lg-50 p-10 order-2 order-lg-1" style="background: linear-gradient(180deg, rgba(0,0,0,0.1966911764705882) 43%, rgba(0,0,0,0.2) 93%);">
+        <div class="d-flex flex-column flex-lg-row-fluid w-lg-50 p-10 order-2 order-lg-1">
             <!--begin::Form-->
-            <div class="d-flex flex-center flex-column flex-lg-row-fluid">
+            <div class="d-flex flex-center flex-column flex-lg-row-fluid vh-100">
                 <!--begin::Wrapper-->
                 <div class="card w-lg-400px p-10 shadow">
                     <!--begin::Form-->
-                    <form wire:submit.prevent="login" class="form w-100 fv-plugins-bootstrap5 fv-plugins-framework"
-                        novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="/metronic8/demo51/index.html"
-                        action="#">
+                    <form wire:submit.prevent="login" class="form w-100 fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="/metronic8/demo51/index.html" action="#">
                         <!--begin::Heading-->
                         <div class="text-start mb-11">
                             <!--begin::Title-->
