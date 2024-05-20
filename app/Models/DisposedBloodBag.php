@@ -12,5 +12,7 @@ class DisposedBloodBag extends Model
         'blood_bag_id',
         'disposed_date',
         'dispose_by',
+        'dispose_classification_id',
+        'status'
     ];
 }

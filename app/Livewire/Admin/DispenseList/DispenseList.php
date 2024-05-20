@@ -94,7 +94,7 @@ class DispenseList extends Table
                 'created_at',
                 'created_at',
                 'Dispense Date and Time',
-                FilterTypeEnum::NONE,
+                FilterTypeEnum::DATE,
                 null,
                 function ($value) {
                     return date('F j, Y g:i A', strtotime($value));

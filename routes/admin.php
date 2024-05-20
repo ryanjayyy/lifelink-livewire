@@ -15,6 +15,7 @@ use App\Livewire\Admin\DeferralList\Temporary;
 use App\Livewire\Admin\DeferralList\Permanent;
 use App\Livewire\Admin\DispenseList\BloodFinder;
 use App\Livewire\Admin\DispenseList\DispenseList;
+use App\Livewire\Admin\DisposeBloodBags\BagList;
 
 
 
@@ -60,4 +61,10 @@ Route::name('admin.')->group(function () {
         Route::get('/blood-finder', BloodFinder::class)->name('blood-finder');
         Route::get('/list', DispenseList::class)->name('list');
     });
+
+    Route::prefix('/dispose')->name('dispose.')->group(function () {
+        Route::get('/blood-bag', BagList::class)->name('blood-bag');
+    });
 });
+
+

@@ -61,7 +61,7 @@
                     <!--begin::Nav link-->
                     <a href="{{ route('admin.inventory.list') }}"
                         class="nav-link btn btn-icon btn-active-info btn-color-gray-600
-                                {{ Route::is('admin.inventory.list') || Route::is('admin.inventory.secure.reactive') || Route::is('admin.inventory.secure.spoiled') || Route::is('admin.inventory.expired') || Route::is('admin.inventory.secure.pin')? 'active' : 'nav-item' }}"
+                                {{ Route::is('admin.inventory.list') || Route::is('admin.inventory.secure.reactive') || Route::is('admin.inventory.secure.spoiled') || Route::is('admin.inventory.expired') || Route::is('admin.inventory.secure.pin') ? 'active' : 'nav-item' }}"
                         wire:navigate data-bs-toggle="tab">
 
                         <i class="ki-outline ki-notepad-edit fs-2"></i>
@@ -70,11 +70,10 @@
                 </li>
                 <!--end::Nav item-->
                 <!--begin::Nav item-->
-                <li class="nav-item mb-2" data-bs-toggle="tooltip" data-bs-trigger="hover"
-                    title="Deferral List">
+                <li class="nav-item mb-2" data-bs-toggle="tooltip" data-bs-trigger="hover" title="Deferral List">
                     <!--begin::Nav link-->
                     <a href="{{ route('admin.deferral.secure.pin') }}/temporary"
-                        class="nav-link btn btn-icon btn-active-info btn-color-gray-600"
+                        class="nav-link btn btn-icon btn-active-info btn-color-gray-600 {{ Route::is('admin.deferral.secure.temporary') || Route::is('admin.deferral.secure.permanent') ? 'active' : 'nav-item' }}"
                         wire:navigate data-bs-toggle="tab">
                         <i class="ki-outline ki-notepad-edit fs-2"></i>
                     </a>
@@ -82,8 +81,7 @@
                 </li>
                 <!--end::Nav item-->
                 <!--begin::Nav item-->
-                <li class="nav-item mb-2" data-bs-toggle="tooltip" data-bs-trigger="hover"
-                    title="Dispense">
+                <li class="nav-item mb-2" data-bs-toggle="tooltip" data-bs-trigger="hover" title="Dispense">
                     <!--begin::Nav link-->
                     <a href="{{ route('admin.dispense.blood-finder') }}"
                         class="nav-link btn btn-icon btn-active-info btn-color-gray-600 {{ request()->is('history.create') ? 'nav active' : 'nav-item' }}"
@@ -93,15 +91,13 @@
                     <!--end::Nav link-->
                 </li>
                 <!--end::Nav item-->
-            </div>
-            <div>
                 <!--begin::Nav item-->
-                <li class="nav-item mb-2">
+                <li class="nav-item mb-2" data-bs-toggle="tooltip" data-bs-trigger="hover" title="Dispose Blood Bags">
                     <!--begin::Nav link-->
-                    <a href="#"
-                        class="nav-link btn btn-icon btn-active-info btn-color-gray-600 {{ request()->is('home') ? 'nav active' : 'nav-item' }}"
+                    <a href="{{ route('admin.dispose.blood-bag') }}"
+                        class="nav-link btn btn-icon btn-active-info btn-color-gray-600 {{ request()->is('history.create') ? 'nav active' : 'nav-item' }}"
                         wire:navigate data-bs-toggle="tab">
-                        <i class="ki-outline ki-home-2 fs-2"></i>
+                        <i class="ki-outline ki-notepad-edit fs-2"></i>
                     </a>
                     <!--end::Nav link-->
                 </li>

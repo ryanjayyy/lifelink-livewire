@@ -12,7 +12,7 @@ class SecurityPin extends Component
 
     public function mount()
     {
-        Request::segment(3) ? $this->lastSegment = Request::segment(4) : $this->lastSegment = 'reactive';
+        $this->lastSegment = collect(Request::segments())->last();
     }
     public function render()
     {

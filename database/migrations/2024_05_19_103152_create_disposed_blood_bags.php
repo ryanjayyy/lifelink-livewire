@@ -16,9 +16,11 @@ return new class extends Migration
             $table->unsignedBigInteger('blood_bag_id');
             $table->timestamp('disposed_date');
             $table->unsignedBigInteger('dispose_by');
+            $table->unsignedBigInteger('dispose_classification_id');
             $table->boolean('status')->default(true);
             $table->timestamps();
 
+            $table->foreign('dispose_classification_id')->references('id')->on('dispose_classifications');
             $table->foreign('blood_bag_id')->references('id')->on('blood_bags');
             $table->foreign('dispose_by')->references('id')->on('users');
         });

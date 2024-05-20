@@ -24,6 +24,11 @@ class DefaultSeeder extends Seeder
             ['sex' => 'Male'],
             ['sex' => 'female'],
         ]);
+        DB::table('dispose_classifications')->insert([
+            ['name' => 'expired'],
+            ['name' => 'reactive'],
+            ['name' => 'spoiled'],
+        ]);
         DB::table('blood_types')->insert([
             ['blood_type' => 'A+'],
             ['blood_type' => 'B+'],

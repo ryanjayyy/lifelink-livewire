@@ -117,7 +117,7 @@ class ReactiveBloodBag extends Table
                 'date_donated',
                 'date_donated',
                 'Date Donated',
-                FilterTypeEnum::NONE,
+                FilterTypeEnum::DATE,
                 null,
                 function ($value) {
                     return "<a class='text-gray-800 text-hover-primary fw-bold'>{$value}</a>";
@@ -127,7 +127,7 @@ class ReactiveBloodBag extends Table
                 'expiration_date',
                 'expiration_date',
                 'Expiration Date',
-                FilterTypeEnum::NONE,
+                FilterTypeEnum::DATE,
                 null,
                 function ($value) {
                     return "<a class='text-gray-800 text-hover-primary fw-bold'>{$value}</a>";
