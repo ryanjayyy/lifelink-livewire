@@ -11,6 +11,8 @@ use App\Livewire\Admin\Inventory\ExpiredBloodBags;
 use App\Livewire\Admin\Inventory\ReactiveBloodBag;
 use App\Livewire\Admin\Inventory\SpoiledBloodBag;
 use App\Livewire\Admin\Inventory\SecurityPin;
+use App\Livewire\Admin\DeferralList\Temporary;
+use App\Livewire\Admin\DeferralList\Permanent;
 
 
 Route::name('admin.')->group(function () {
@@ -40,5 +42,15 @@ Route::name('admin.')->group(function () {
             Route::get('/reactive', ReactiveBloodBag::class)->name('reactive');
             Route::get('/spoiled', SpoiledBloodBag::class)->name('spoiled');
         });
+    });
+
+    Route::prefix('/deferral')->name('deferral.')->group(function () {
+
+        Route::prefix('/secure')->name('secure.')->group(function () {
+            Route::get('/pin/{module?}', SecurityPin::class)->name('pin');
+            Route::get('/temporary', Temporary::class)->name('temporary');
+            Route::get('/permanent', Permanent::class)->name('permanent');
+        });
+
     });
 });

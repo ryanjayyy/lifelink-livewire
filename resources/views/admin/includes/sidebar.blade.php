@@ -13,10 +13,10 @@
         <ul class="nav flex-column w-lg-100" id="kt_app_sidebar_nav">
             <div>
                 <!--begin::Nav item-->
-                <li class="nav-item mb-2" data-bs-toggle="tooltip" data-bs-trigger="hover"  title="Dashboard">
+                <li class="nav-item mb-2" data-bs-toggle="tooltip" data-bs-trigger="hover" title="Dashboard">
                     <!--begin::Nav link-->
                     <a href="{{ route('admin.dashboard.dashboard') }}"
-                        class="nav-link btn btn-icon btn-active-info btn-color-gray-600 {{ request()->is('dashboard') ? 'nav active' : 'nav-item' }}"
+                        class="nav-link btn btn-icon btn-active-info btn-color-gray-600 {{ Route::is('admin.dashboard.dashboard') ? 'active' : 'nav-item' }}"
                         wire:navigate data-bs-toggle="tab">
                         <i class="ki-outline ki-home-2 fs-2"></i>
                     </a>
@@ -24,11 +24,10 @@
                 </li>
                 <!--end::Nav item-->
                 <!--begin::Nav item-->
-                <li class="nav-item mb-2" data-bs-toggle="tooltip" data-bs-trigger="hover"
-                    title="Users List">
+                <li class="nav-item mb-2" data-bs-toggle="tooltip" data-bs-trigger="hover" title="Users List">
                     <!--begin::Nav link-->
                     <a href="{{ route('admin.users.list') }}"
-                        class="nav-link btn btn-icon btn-active-info btn-color-gray-600 {{ request()->is('admin.users.list') ? 'nav active' : 'nav-item' }}"
+                        class="nav-link btn btn-icon btn-active-info btn-color-gray-600 {{ Route::is('admin.users.list') ? 'active' : 'nav-item' }}"
                         wire:navigate data-bs-toggle="tab">
                         <i class="ki-outline ki-notepad-edit fs-2"></i>
                     </a>
@@ -36,11 +35,10 @@
                 </li>
                 <!--end::Nav item-->
                 <!--begin::Nav item-->
-                <li class="nav-item mb-2" data-bs-toggle="tooltip" data-bs-trigger="hover"
-                    title="Donors List">
+                <li class="nav-item mb-2" data-bs-toggle="tooltip" data-bs-trigger="hover" title="Donors List">
                     <!--begin::Nav link-->
                     <a href="{{ route('admin.donors.list') }}"
-                        class="nav-link btn btn-icon btn-active-info btn-color-gray-600 {{ request()->is('history.create') ? 'nav active' : 'nav-item' }}"
+                        class="nav-link btn btn-icon btn-active-info btn-color-gray-600 {{ Route::is('admin.donors.list') ? 'active' : 'nav-item' }}"
                         wire:navigate data-bs-toggle="tab">
                         <i class="ki-outline ki-notepad-edit fs-2"></i>
                     </a>
@@ -48,11 +46,10 @@
                 </li>
                 <!--end::Nav item-->
                 <!--begin::Nav item-->
-                <li class="nav-item mb-2" data-bs-toggle="tooltip" data-bs-trigger="hover"
-                    title="Blood Bags">
+                <li class="nav-item mb-2" data-bs-toggle="tooltip" data-bs-trigger="hover" title="Blood Bags">
                     <!--begin::Nav link-->
                     <a href="{{ route('admin.blood-bag.list') }}"
-                        class="nav-link btn btn-icon btn-active-info btn-color-gray-600 {{ request()->is('history.create') ? 'nav active' : 'nav-item' }}"
+                        class="nav-link btn btn-icon btn-active-info btn-color-gray-600 {{ Route::is('admin.blood-bag.list') ? 'active' : 'nav-item' }}"
                         wire:navigate data-bs-toggle="tab">
                         <i class="ki-outline ki-notepad-edit fs-2"></i>
                     </a>
@@ -60,12 +57,13 @@
                 </li>
                 <!--end::Nav item-->
                 <!--begin::Nav item-->
-                <li class="nav-item mb-2" data-bs-toggle="tooltip" data-bs-trigger="hover"
-                    title="Inventory">
+                <li class="nav-item mb-2" data-bs-toggle="tooltip" data-bs-trigger="hover" title="Inventory">
                     <!--begin::Nav link-->
                     <a href="{{ route('admin.inventory.list') }}"
-                        class="nav-link btn btn-icon btn-active-info btn-color-gray-600 {{ request()->is('history.create') ? 'nav active' : 'nav-item' }}"
+                        class="nav-link btn btn-icon btn-active-info btn-color-gray-600
+                                {{ Route::is('admin.inventory.list') || Route::is('admin.inventory.secure.reactive') || Route::is('admin.inventory.secure.spoiled') || Route::is('admin.inventory.expired') || Route::is('admin.inventory.secure.pin')? 'active' : 'nav-item' }}"
                         wire:navigate data-bs-toggle="tab">
+
                         <i class="ki-outline ki-notepad-edit fs-2"></i>
                     </a>
                     <!--end::Nav link-->
@@ -73,10 +71,10 @@
                 <!--end::Nav item-->
                 <!--begin::Nav item-->
                 <li class="nav-item mb-2" data-bs-toggle="tooltip" data-bs-trigger="hover"
-                    title="Create Supplier Invoice">
+                    title="Deferral List">
                     <!--begin::Nav link-->
-                    <a href="#"
-                        class="nav-link btn btn-icon btn-active-info btn-color-gray-600 {{ request()->is('history.create') ? 'nav active' : 'nav-item' }}"
+                    <a href="{{ route('admin.deferral.secure.pin') }}/temporary"
+                        class="nav-link btn btn-icon btn-active-info btn-color-gray-600"
                         wire:navigate data-bs-toggle="tab">
                         <i class="ki-outline ki-notepad-edit fs-2"></i>
                     </a>

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->unsignedBigInteger('blood_type_id');
             $table->string('diagnosis');
             $table->unsignedBigInteger('hospital_id');
+            $table->boolean('status')->default(true);
             $table->timestamps();
 
             $table->foreign('blood_type_id')->references('id')->on('blood_types');

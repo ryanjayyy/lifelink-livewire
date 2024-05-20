@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('other_reason')->nullable(true);
             $table->integer('deferral_duration')->nullable(true);
             $table->date('end_date')->nullable(true);
+            $table->boolean('status')->default(true);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

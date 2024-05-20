@@ -35,8 +35,12 @@ class SecurityPin extends Component
         if ($this->securityPin == $pin) {
             if ($this->lastSegment == 'reactive') {
                 return redirect()->route('admin.inventory.secure.reactive');
-            } else {
+            } elseif ($this->lastSegment == 'spoiled') {
                 return redirect()->route('admin.inventory.secure.spoiled');
+            }elseif ($this->lastSegment == 'temporary') {
+                return redirect()->route('admin.deferral.secure.temporary');
+            }elseif ($this->lastSegment == 'permanent') {
+                return redirect()->route('admin.deferral.secure.permanent');
             }
         } else {
             session()->flash('error', 'Security pin is incorrect.');
