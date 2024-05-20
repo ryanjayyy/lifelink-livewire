@@ -8,6 +8,7 @@ use Livewire\Attributes\On;
 use App\Models\BloodBag;
 use App\Models\Hospital;
 use App\Models\DispenseList;
+use App\Models\PatientDetail;
 
 class DispenseBlood extends Component
 {
@@ -81,8 +82,7 @@ class DispenseBlood extends Component
             'isUsed' => 1
         ]);
 
-        DispenseList::create([
-            'blood_bag_id' => $this->bagId,
+        $patient = PatientDetail::create([
             'first_name' => ucwords($this->first_name),
             'middle_name' => ucwords($this->middle_name),
             'last_name' => ucwords($this->last_name),
@@ -91,6 +91,12 @@ class DispenseBlood extends Component
             'blood_type_id' => $this->blood_type,
             'diagnosis' => ucwords($this->diagnosis),
             'hospital_id' => $this->hospital
+        ]);
+
+
+        DispenseList::create([
+            'blood_bag_id' => $this->bagId,
+            'patient_details_id' => $patient->id
         ]);
 
         dd("saved");

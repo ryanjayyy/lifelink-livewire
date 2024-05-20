@@ -13,6 +13,9 @@ use App\Livewire\Admin\Inventory\SpoiledBloodBag;
 use App\Livewire\Admin\Inventory\SecurityPin;
 use App\Livewire\Admin\DeferralList\Temporary;
 use App\Livewire\Admin\DeferralList\Permanent;
+use App\Livewire\Admin\DispenseList\BloodFinder;
+use App\Livewire\Admin\DispenseList\DispenseList;
+
 
 
 Route::name('admin.')->group(function () {
@@ -51,6 +54,10 @@ Route::name('admin.')->group(function () {
             Route::get('/temporary', Temporary::class)->name('temporary');
             Route::get('/permanent', Permanent::class)->name('permanent');
         });
+    });
 
+    Route::prefix('/dispense')->name('dispense.')->group(function () {
+        Route::get('/blood-finder', BloodFinder::class)->name('blood-finder');
+        Route::get('/list', DispenseList::class)->name('list');
     });
 });

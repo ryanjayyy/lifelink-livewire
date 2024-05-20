@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('dispensed_lists', function (Blueprint $table) {
+        Schema::create('patient_details', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('blood_bag_id');
             $table->string('first_name');
             $table->string('middle_name');
             $table->string('last_name');
@@ -26,7 +25,6 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('blood_type_id')->references('id')->on('blood_types');
-            $table->foreign('blood_bag_id')->references('id')->on('blood_bags');
             $table->foreign('hospital_id')->references('id')->on('hospitals');
             $table->foreign('sex_id')->references('id')->on('sexes');
         });

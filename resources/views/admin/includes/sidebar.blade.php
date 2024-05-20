@@ -83,9 +83,9 @@
                 <!--end::Nav item-->
                 <!--begin::Nav item-->
                 <li class="nav-item mb-2" data-bs-toggle="tooltip" data-bs-trigger="hover"
-                    title="Create Supplier Invoice">
+                    title="Dispense">
                     <!--begin::Nav link-->
-                    <a href="#"
+                    <a href="{{ route('admin.dispense.blood-finder') }}"
                         class="nav-link btn btn-icon btn-active-info btn-color-gray-600 {{ request()->is('history.create') ? 'nav active' : 'nav-item' }}"
                         wire:navigate data-bs-toggle="tab">
                         <i class="ki-outline ki-notepad-edit fs-2"></i>
