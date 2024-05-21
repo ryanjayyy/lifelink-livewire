@@ -15,7 +15,8 @@
                 <!--begin::Info-->
                 <div class="d-flex align-items-center">
                     <!--begin::Amount-->
-                    <span class="fs-2hx fw-bold text-gray-900 me-2 lh-1 ls-n2 badge badge-light-success fs-base">{{ $userCount }}</span>
+                    <span
+                        class="fs-2hx fw-bold text-gray-900 me-2 lh-1 ls-n2 badge badge-light-success fs-base">{{ $userCount }}</span>
                     <!--end::Amount-->
                 </div>
                 <!--end::Info-->
@@ -32,7 +33,6 @@
             @livewire('Admin\UsersList\AddUser')
             <button type="button" class="btn btn-primary mt-8">Export PDF</button>
         </div>
-
     </div>
 
     @include('livewire.table')
@@ -42,7 +42,6 @@
     @livewire('Admin\UsersList\MoveToDeferral')
 
 </div>
-
 
 @section('page-scripts')
 @endsection

@@ -101,7 +101,8 @@ class AddUser extends Component
             'zip_code' => $validatedData['zip_code'],
         ]);
 
-        return redirect()->route('admin.users.list');
+            $this->dispatch('success');
+
     }
 
     public function getProvinceList()

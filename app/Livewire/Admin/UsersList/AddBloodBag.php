@@ -170,7 +170,7 @@ class AddBloodBag extends Component
             ]);
         }
 
-        dd("saved");
+        $this->dispatch('success');
     }
 
     public function getBadgeType($donaQty)

@@ -9,6 +9,7 @@ use Livewire\Attributes\Computed;
 use App\Services\Table\Column;
 use App\Enums\Livewire\Table\FilterTypeEnum;
 use Carbon\Carbon;
+use Livewire\Attributes\On;
 
 use App\Models\BloodBag;
 use App\Models\BloodType;
@@ -16,6 +17,9 @@ use App\Models\BloodType;
 class Main extends Table
 {
     public $stockCount;
+    public $selectedIds = null;
+    public $displayButton = false;
+    public $showButton = false;
 
     public function mount()
     {
@@ -101,6 +105,19 @@ class Main extends Table
 
         return [
             Column::create(
+                'click_id',
+                'click_id',
+                '',
+                FilterTypeEnum::NONE,
+                null,
+                function ($value) {
+                    return '<div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="' . $value . '" id="blood_bag_id_' . $value . '" onchange="updateSelectedIds(this)">
+                            </div>';
+                }
+            ),
+
+            Column::create(
                 'donor_number',
                 'donor_number',
                 'Donor Number',
@@ -178,12 +195,15 @@ class Main extends Table
                     return "<span class='{$class}'>{$value}</span>";
                 }
             ),
-            Column::create('click_id', 'click_id', '', FilterTypeEnum::NONE, null, function ($value) {
-                $bag = BloodBag::where('id', $value)->first();
-
-                return <<<HTML
+            Column::create(
+                'click_id',
+                'click_id',
+                '',
+                FilterTypeEnum::NONE,
+                null,
+                function ($value) {
+                    return <<<HTML
                 <div class="d-flex justify-content-center gap-4">
-
                     <a wire:click="dispatchId({$value})" class="btn btn-primary text-white px-2"
                         data-bs-toggle="modal"
                         data-bs-target="#undo-modal"
@@ -210,12 +230,21 @@ class Main extends Table
                     </a>
                 </div>
             HTML;
-            }),
+                }
+            ),
         ];
     }
+
 
     public function dispatchId($user_id)
     {
         $this->dispatch('openModal', $user_id);
+    }
+
+    #[On('updateSelectedIds')]
+    public function updateSelectedIds($ids)
+    {
+        $this->selectedIds = $ids ?: [];
+
     }
 }

@@ -18,7 +18,7 @@
                     <a href="{{ route('admin.dashboard.dashboard') }}"
                         class="nav-link btn btn-icon btn-active-info btn-color-gray-600 {{ Route::is('admin.dashboard.dashboard') ? 'active' : 'nav-item' }}"
                         wire:navigate data-bs-toggle="tab">
-                        <i class="ki-outline ki-home-2 fs-2"></i>
+                        <i class="ki-duotone ki-home fs-2qx"></i>
                     </a>
                     <!--end::Nav link-->
                 </li>
@@ -29,7 +29,12 @@
                     <a href="{{ route('admin.users.list') }}"
                         class="nav-link btn btn-icon btn-active-info btn-color-gray-600 {{ Route::is('admin.users.list') ? 'active' : 'nav-item' }}"
                         wire:navigate data-bs-toggle="tab">
-                        <i class="ki-outline ki-notepad-edit fs-2"></i>
+                        <i class="ki-duotone ki-profile-user fs-2qx">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                            <span class="path3"></span>
+                            <span class="path4"></span>
+                        </i>
                     </a>
                     <!--end::Nav link-->
                 </li>
@@ -40,7 +45,12 @@
                     <a href="{{ route('admin.donors.list') }}"
                         class="nav-link btn btn-icon btn-active-info btn-color-gray-600 {{ Route::is('admin.donors.list') ? 'active' : 'nav-item' }}"
                         wire:navigate data-bs-toggle="tab">
-                        <i class="ki-outline ki-notepad-edit fs-2"></i>
+                        <i class="ki-duotone ki-emoji-happy fs-2qx">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                            <span class="path3"></span>
+                            <span class="path4"></span>
+                        </i>
                     </a>
                     <!--end::Nav link-->
                 </li>
@@ -51,7 +61,12 @@
                     <a href="{{ route('admin.blood-bag.list') }}"
                         class="nav-link btn btn-icon btn-active-info btn-color-gray-600 {{ Route::is('admin.blood-bag.list') ? 'active' : 'nav-item' }}"
                         wire:navigate data-bs-toggle="tab">
-                        <i class="ki-outline ki-notepad-edit fs-2"></i>
+                        <i class="ki-duotone ki-office-bag fs-2qx">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                            <span class="path3"></span>
+                            <span class="path4"></span>
+                        </i>
                     </a>
                     <!--end::Nav link-->
                 </li>
@@ -63,8 +78,13 @@
                         class="nav-link btn btn-icon btn-active-info btn-color-gray-600
                                 {{ Route::is('admin.inventory.list') || Route::is('admin.inventory.secure.reactive') || Route::is('admin.inventory.secure.spoiled') || Route::is('admin.inventory.expired') || Route::is('admin.inventory.secure.pin') ? 'active' : 'nav-item' }}"
                         wire:navigate data-bs-toggle="tab">
-
-                        <i class="ki-outline ki-notepad-edit fs-2"></i>
+                        <i class="ki-duotone ki-external-drive fs-2qx">
+                        <span class="path1"></span>
+                        <span class="path2"></span>
+                        <span class="path3"></span>
+                        <span class="path4"></span>
+                        <span class="path5"></span>
+                        </i>
                     </a>
                     <!--end::Nav link-->
                 </li>
@@ -75,7 +95,11 @@
                     <a href="{{ route('admin.deferral.secure.pin') }}/temporary"
                         class="nav-link btn btn-icon btn-active-info btn-color-gray-600 {{ Route::is('admin.deferral.secure.temporary') || Route::is('admin.deferral.secure.permanent') ? 'active' : 'nav-item' }}"
                         wire:navigate data-bs-toggle="tab">
-                        <i class="ki-outline ki-notepad-edit fs-2"></i>
+                        <i class="ki-duotone ki-shield-cross fs-2qx">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                            <span class="path3"></span>
+                        </i>
                     </a>
                     <!--end::Nav link-->
                 </li>
@@ -86,7 +110,10 @@
                     <a href="{{ route('admin.dispense.blood-finder') }}"
                         class="nav-link btn btn-icon btn-active-info btn-color-gray-600 {{ request()->is('history.create') ? 'nav active' : 'nav-item' }}"
                         wire:navigate data-bs-toggle="tab">
-                        <i class="ki-outline ki-notepad-edit fs-2"></i>
+                        <i class="ki-duotone ki-heart fs-2qx">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>
                     </a>
                     <!--end::Nav link-->
                 </li>
@@ -97,14 +124,20 @@
                     <a href="{{ route('admin.dispose.blood-bag') }}"
                         class="nav-link btn btn-icon btn-active-info btn-color-gray-600 {{ request()->is('history.create') ? 'nav active' : 'nav-item' }}"
                         wire:navigate data-bs-toggle="tab">
-                        <i class="ki-outline ki-notepad-edit fs-2"></i>
+                        <i class="ki-duotone ki-trash fs-2qx">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                            <span class="path3"></span>
+                            <span class="path4"></span>
+                            <span class="path5"></span>
+                        </i>
                     </a>
                     <!--end::Nav link-->
                 </li>
                 <!--end::Nav item-->
             </div>
         </ul>
-        <!--end::Tabs-->
+        <!--end::Nav-->
     </div>
     <!--end::Nav-->
 </div>

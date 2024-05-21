@@ -112,6 +112,6 @@ class MoveToDeferral extends Component
             'isDeferred' => true,
         ]);
 
-        dd("saved");
+        $this->dispatch('success');
     }
 }

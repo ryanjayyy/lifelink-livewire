@@ -29,6 +29,18 @@ class DefaultSeeder extends Seeder
             ['name' => 'reactive'],
             ['name' => 'spoiled'],
         ]);
+        DB::table('request_statuses')->insert([
+            ['name' => 'Pending'],
+            ['name' => 'Referred'],
+            ['name' => 'Accomodated'],
+        ]);
+        DB::table('blood_components')->insert([
+            ['name' => 'Whole Blood'],
+            ['name' => 'Red Blood Cells'],
+            ['name' => 'Platelets'],
+            ['name' => 'Plasma'],
+            ['name' => 'White Blood Cells'],
+        ]);
         DB::table('blood_types')->insert([
             ['blood_type' => 'A+'],
             ['blood_type' => 'B+'],

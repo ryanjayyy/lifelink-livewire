@@ -310,7 +310,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="submit" id="add-user" class="btn btn-primary">Save changes</button>
                     </div>
                 </form>
             </div>
@@ -318,3 +318,49 @@
     </div>
 </div>
 
+<script>
+    const addUserbutton = document.getElementById('add-user');
+
+    addUserbutton.addEventListener('click', e => {
+        e.preventDefault();
+
+        Swal.fire({
+            html: `Are you sure you want to confirm this action?`,
+            icon: "warning",
+            buttonsStyling: false,
+            showCancelButton: true,
+            confirmButtonText: "Ok, got it!",
+            cancelButtonText: 'Nope, cancel it',
+            customClass: {
+                confirmButton: "btn btn-primary",
+                cancelButton: 'btn btn-danger'
+            }
+        }).then(result => {
+            if (result.isConfirmed) {
+                // Dispatch form submission event only if user confirmed
+                e.target.form.dispatchEvent(new Event('submit', {
+                    bubbles: true,
+                    cancelable: true
+                }));
+            }
+        });
+    });
+
+    // Listen for Livewire events to show the SweetAlert modal after successful form submission
+    document.addEventListener('livewire:init', function () {
+        Livewire.on('success', () => {
+            Swal.fire({
+                text: "User has been added successfully!",
+                icon: "success",
+                buttonsStyling: false,
+                confirmButtonText: "Ok, got it!",
+                customClass: {
+                    confirmButton: "btn btn-primary"
+                },
+                didClose: () => {
+                    window.location.href = "{{ route('admin.users.list') }}";
+                }
+            });
+        });
+    });
+</script>

@@ -10,6 +10,7 @@ use App\Models\Barangay;
 use App\Models\User;
 use App\Models\MemberDetail;
 use Livewire\Attributes\On;
+use Illuminate\Validation\ValidationException;
 
 use function Laravel\Prompts\select;
 
@@ -91,6 +92,8 @@ class EditUser extends Component
 
     public function editUser()
     {
+
+
         $validatedData = $this->validate([
             'email' => 'required|email|unique:users,email,' . $this->userId,
             'mobile' => 'required|unique:users,mobile,' . $this->userId,
@@ -125,6 +128,7 @@ class EditUser extends Component
             'zip_code' => $this->zip_code,
         ]);
 
+        $this->dispatch('success');
 
     }
 }
