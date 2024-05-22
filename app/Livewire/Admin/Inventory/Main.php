@@ -17,9 +17,7 @@ use App\Models\BloodType;
 class Main extends Table
 {
     public $stockCount;
-    public $selectedIds = null;
-    public $displayButton = false;
-    public $showButton = false;
+    public $selectedIds = [];
 
     public function mount()
     {
@@ -111,8 +109,12 @@ class Main extends Table
                 FilterTypeEnum::NONE,
                 null,
                 function ($value) {
+                    $bag = BloodBag::where('id', $value)->first();
+                    $isTested = $bag->isTested;
+                    $disabledToStock = $isTested ? '' : ' disabled';
+
                     return '<div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" value="' . $value . '" id="blood_bag_id_' . $value . '" onchange="updateSelectedIds(this)">
+                                <input class="form-check-input" type="checkbox" value="' . $value . '" wire:click="toggleSelectedId(' . $value . ')" ' . $disabledToStock . '>
                             </div>';
                 }
             ),
@@ -216,7 +218,7 @@ class Main extends Table
                         </i>
                     </a>
 
-                    <a wire:click="dispatchId({$value})"
+                    <!-- <a wire:click="dispatchId({$value})"
                         class="btn btn-primary text-white px-3"
                         data-bs-toggle="modal"
                         data-bs-target="#dispense-modal"
@@ -227,7 +229,7 @@ class Main extends Table
                         <span class="path2"></span>
                         <span class="path3"></span>
                         </i>
-                    </a>
+                    </a> -->
                 </div>
             HTML;
                 }
@@ -241,10 +243,21 @@ class Main extends Table
         $this->dispatch('openModal', $user_id);
     }
 
-    #[On('updateSelectedIds')]
-    public function updateSelectedIds($ids)
+    public function toggleSelectedId($id)
     {
-        $this->selectedIds = $ids ?: [];
 
+        $index = array_search($id, $this->selectedIds);
+
+        if ($index !== false) {
+            unset($this->selectedIds[$index]);
+            $this->selectedIds = array_values($this->selectedIds);
+        } else {
+            $this->selectedIds[] = $id;
+        }
+    }
+
+    public function bulkDispense()
+    {
+        $this->dispatch('dispenseBloodBags', $this->selectedIds);
     }
 }

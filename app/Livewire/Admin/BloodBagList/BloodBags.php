@@ -289,15 +289,12 @@ class BloodBags extends Table
     public function toggleSelectedId($id)
     {
 
-        // Check if the ID exists in the array
         $index = array_search($id, $this->selectedIds);
 
         if ($index !== false) {
-            // If ID exists, remove it from the array
             unset($this->selectedIds[$index]);
             $this->selectedIds = array_values($this->selectedIds);
         } else {
-            // If ID doesn't exist, add it to the array
             $this->selectedIds[] = $id;
         }
 

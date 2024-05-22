@@ -30,51 +30,21 @@
             <!--end::Title-->
         </div> --}}
         <div>
+            <div class="d-flex justify-content-start w-100">
+                <button type="button" wire:click='bulkDispense' class="btn btn-primary mt-8" data-bs-toggle="modal"
+                data-bs-target="#dispense-modal">Dispense Blood</button>
 
-            @if(session()->has('displayButton') && session('displayButton') == true)
-                <button type="button" class="btn btn-primary">Button Text</button>
-            @endif
+            </div>
         </div>
         <div class="d-flex justify-content-end gap-4">
             <button type="button" class="btn btn-primary mt-8">Export PDF</button>
         </div>
 
     </div>
-    <input type="text" wire:model.lazy="selectedIds" id="selected_ids" name="selected_ids" value="">
 
     @include('livewire.table')
     @livewire('Admin\Inventory\UndoBloodBag')
     @livewire('Admin\Inventory\DispenseBlood')
-    <script>
-        function updateSelectedIds(checkbox) {
-            let selectedIds;
-
-            try {
-                selectedIds = JSON.parse(document.getElementById('selected_ids').value);
-            } catch (e) {
-                selectedIds = [];
-            }
-
-            selectedIds = Array.isArray(selectedIds) ? selectedIds : [];
-
-            const value = checkbox.value;
-
-            if (checkbox.checked) {
-                if (!selectedIds.includes(value)) {
-                    selectedIds.push(value);
-                }
-            } else {
-                selectedIds = selectedIds.filter(id => id !== value);
-            }
-
-            document.getElementById('selected_ids').value = JSON.stringify(selectedIds);
-
-            console.log('Checkbox ID:', value);
-            console.log('Selected IDs:', selectedIds);
-
-            Livewire.dispatch('updateSelectedIds', {ids:selectedIds});
-        }
-    </script>
 </div>
 
 
