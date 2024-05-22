@@ -79,11 +79,11 @@
                                 {{ Route::is('admin.inventory.list') || Route::is('admin.inventory.secure.reactive') || Route::is('admin.inventory.secure.spoiled') || Route::is('admin.inventory.expired') || Route::is('admin.inventory.secure.pin') ? 'active' : 'nav-item' }}"
                         wire:navigate data-bs-toggle="tab">
                         <i class="ki-duotone ki-external-drive fs-2qx">
-                        <span class="path1"></span>
-                        <span class="path2"></span>
-                        <span class="path3"></span>
-                        <span class="path4"></span>
-                        <span class="path5"></span>
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                            <span class="path3"></span>
+                            <span class="path4"></span>
+                            <span class="path5"></span>
                         </i>
                     </a>
                     <!--end::Nav link-->
@@ -108,7 +108,7 @@
                 <li class="nav-item mb-2" data-bs-toggle="tooltip" data-bs-trigger="hover" title="Dispense">
                     <!--begin::Nav link-->
                     <a href="{{ route('admin.dispense.blood-finder') }}"
-                        class="nav-link btn btn-icon btn-active-info btn-color-gray-600 {{ request()->is('history.create') ? 'nav active' : 'nav-item' }}"
+                        class="nav-link btn btn-icon btn-active-info btn-color-gray-600 {{ Route::is('admin.dispense.blood-finder') ? 'active' : 'nav-item' }}"
                         wire:navigate data-bs-toggle="tab">
                         <i class="ki-duotone ki-heart fs-2qx">
                             <span class="path1"></span>
@@ -119,10 +119,11 @@
                 </li>
                 <!--end::Nav item-->
                 <!--begin::Nav item-->
-                <li class="nav-item mb-2" data-bs-toggle="tooltip" data-bs-trigger="hover" title="Dispose Blood Bags">
+                <li class="nav-item mb-2" data-bs-toggle="tooltip" data-bs-trigger="hover"
+                    title="Dispose Blood Bags">
                     <!--begin::Nav link-->
                     <a href="{{ route('admin.dispose.blood-bag') }}"
-                        class="nav-link btn btn-icon btn-active-info btn-color-gray-600 {{ request()->is('history.create') ? 'nav active' : 'nav-item' }}"
+                        class="nav-link btn btn-icon btn-active-info btn-color-gray-600 {{ Route::is('admin.dispose.blood-bag') ? 'active' : 'nav-item' }}"
                         wire:navigate data-bs-toggle="tab">
                         <i class="ki-duotone ki-trash fs-2qx">
                             <span class="path1"></span>
@@ -130,6 +131,48 @@
                             <span class="path3"></span>
                             <span class="path4"></span>
                             <span class="path5"></span>
+                        </i>
+                    </a>
+                    <!--end::Nav link-->
+                </li>
+                <!--end::Nav item-->
+                <!--begin::Nav item-->
+                <li class="nav-item mb-2" data-bs-toggle="tooltip" data-bs-trigger="hover" title="Blood Network">
+                    <!--begin::Nav link-->
+                    <a href="{{ route('admin.network.blood-request') }}"
+                        class="nav-link btn btn-icon btn-active-info btn-color-gray-600 {{ Route::is('admin.network.blood-request') ? 'active' : 'nav-item' }}"
+                        wire:navigate data-bs-toggle="tab">
+                        <i class="ki-duotone ki-heart fs-2qx">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>
+                    </a>
+                    <!--end::Nav link-->
+                </li>
+                <!--end::Nav item-->
+                <!--begin::Nav item-->
+                <li class="nav-item mb-2" data-bs-toggle="tooltip" data-bs-trigger="hover" title="Activity Log">
+                    <!--begin::Nav link-->
+                    <a href="{{ route('admin.activity-log.list') }}"
+                        class="nav-link btn btn-icon btn-active-info btn-color-gray-600 {{ Route::is('admin.activity-log.list') ? 'active' : 'nav-item' }}"
+                        wire:navigate data-bs-toggle="tab">
+                        <i class="ki-duotone ki-heart fs-2qx">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>
+                    </a>
+                    <!--end::Nav link-->
+                </li>
+                <!--end::Nav item-->
+                <!--begin::Nav item-->
+                <li class="nav-item mb-2" data-bs-toggle="tooltip" data-bs-trigger="hover" title="MBD Report">
+                    <!--begin::Nav link-->
+                    <a href="{{ route('admin.dispense.blood-finder') }}"
+                        class="nav-link btn btn-icon btn-active-info btn-color-gray-600 {{ request()->is('history.create') ? 'nav active' : 'nav-item' }}"
+                        wire:navigate data-bs-toggle="tab">
+                        <i class="ki-duotone ki-heart fs-2qx">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
                         </i>
                     </a>
                     <!--end::Nav link-->

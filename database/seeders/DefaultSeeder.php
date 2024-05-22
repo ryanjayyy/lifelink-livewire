@@ -13,9 +13,6 @@ class DefaultSeeder extends Seeder
      */
     public function run(): void
     {
-        // DB::table('users')->insert([
-        //     ['role_id' => 1, 'email' => 'email', 'mobile' => '09683104353', 'password' => '$2y$12$huETE88hnQUA1JnggMtbtOmVybFvGOSe5VroyzHno7sAtEVZ07foK', 'isDeferred' => 0, 'isDonor' => 0, 'unhash_password' => 'Kabayo0500.', 'created_at' => '2024-05-19 10:42:24', 'updated_at' => '2024-05-19 10:42:24'],
-        // ]);
         DB::table('user_roles')->insert([
             ['role' => 'Admin'],
             ['role' => 'Member'],
@@ -28,6 +25,19 @@ class DefaultSeeder extends Seeder
             ['name' => 'expired'],
             ['name' => 'reactive'],
             ['name' => 'spoiled'],
+        ]);
+        DB::table('module_categories')->insert([
+            ['name' => 'User List'],
+            ['name' => 'Blood Bags'],
+            ['name' => 'Inventory'],
+            ['name' => 'Deferral List'],
+            ['name' => 'Dispense List'],
+            ['name' => 'Dispose Blood Bags'],
+            ['name' => 'Blood Network'],
+            ['name' => 'MBD Report'],
+            ['name' => 'Authentication'],
+            ['name' => 'System Defaults'],
+            ['name' => 'Settings'],
         ]);
         DB::table('request_statuses')->insert([
             ['name' => 'Pending'],

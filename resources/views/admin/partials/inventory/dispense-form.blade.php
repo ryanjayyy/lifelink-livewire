@@ -21,15 +21,20 @@
             <div class="input-group mb-3">
                 <input type="text" class="form-control" wire:model="searchUserName" wire:input="searchInput"
                     placeholder="Search name">
+                <button class="input-group-text btn btn-primary" wire:click="clearSearch">
+                    <i class="bi bi-x fs-4"></i>
+                </button>
             </div>
             <div class="list-group overflow-y-auto" style="height: 70px;">
                 @if (!$userList)
                     <p class="text-muted text-center">No users found</p>
                 @else
                     @foreach ($userList as $user)
-                        <a wire:click="selectUser('{{ $user->user_id }}')" class="list-group-item list-group-item-action">
+                        <a wire:click="selectUser('{{ $user->user_id }}')"
+                            class="list-group-item list-group-item-action">
                             <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">{{ $user->first_name }} {{ $user->middle_name }} {{ $user->last_name }}</h5>
+                                <h5 class="mb-1">{{ $user->first_name }} {{ $user->middle_name }}
+                                    {{ $user->last_name }}</h5>
                             </div>
                         </a>
                     @endforeach

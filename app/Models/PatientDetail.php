@@ -10,6 +10,7 @@ class PatientDetail extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'first_name',
         'middle_name',
         'last_name',
@@ -19,5 +20,6 @@ class PatientDetail extends Model
         'blood_type_id',
         'diagnosis',
         'hospital_id',
+        'dispensed_date'
     ];
 }

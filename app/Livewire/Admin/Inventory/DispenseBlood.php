@@ -10,6 +10,7 @@ use App\Models\Hospital;
 use App\Models\DispenseList;
 use App\Models\MemberDetail;
 use App\Models\PatientDetail;
+use App\Models\AuditTrail;
 
 class DispenseBlood extends Component
 {
@@ -19,6 +20,7 @@ class DispenseBlood extends Component
     public $searchUserName;
     public $userList;
     public $fastFill;
+    public $userId;
 
     public $first_name;
     public $middle_name;
@@ -97,6 +99,7 @@ class DispenseBlood extends Component
         ]);
 
         $patient = PatientDetail::create([
+            'user_id' => $this->userId,
             'first_name' => ucwords($this->first_name),
             'middle_name' => ucwords($this->middle_name),
             'last_name' => ucwords($this->last_name),
@@ -104,7 +107,29 @@ class DispenseBlood extends Component
             'sex_id' => $this->sex,
             'blood_type_id' => $this->blood_type,
             'diagnosis' => ucwords($this->diagnosis),
-            'hospital_id' => $this->hospital
+            'hospital_id' => $this->hospital,
+            'dispensed_date' => now(),
+        ]);
+
+        $ip = file_get_contents('https://api.ipify.org');
+        $ch = curl_init('http://ipwho.is/' . $ip);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        $ipwhois = json_decode(curl_exec($ch), true);
+        curl_close($ch);
+
+        $authUser = auth()->user();
+        AuditTrail::create([
+            'user_id' => $authUser->id,
+            'module_category_id' => 3,
+            'action' => 'Dispensed blood to patient_details_id = ' . $patient->id,
+            'status' => 'Success',
+            'ip_address' => $ipwhois['ip'],
+            'region'     => $ipwhois['region'],
+            'city'       => $ipwhois['city'],
+            'postal'     => $ipwhois['postal'],
+            'latitude'   => $ipwhois['latitude'],
+            'longitude'  => $ipwhois['longitude'],
         ]);
 
         foreach ($this->selectedIds as $id) {
@@ -122,6 +147,13 @@ class DispenseBlood extends Component
         dd("saved");
     }
 
+    public function clearSearch()
+    {
+        $this->searchUserName = null;
+        $this->reset('first_name', 'middle_name', 'last_name', 'dob', 'sex', 'blood_type', 'diagnosis', 'hospital');
+        $this->userList = null;
+    }
+
     public function searchInput()
     {
 
@@ -132,6 +164,7 @@ class DispenseBlood extends Component
 
     public function selectUser($user_id)
     {
+        $this->userId = $user_id;
         // $this->searchUserName = $id;
         $this->fastFill = MemberDetail::where('user_id', $user_id)->first();
 

@@ -13,8 +13,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         $schedule->command('auth:clear-resets')->daily();
-
         $schedule->command('queue:retry all')->hourly();
+        $schedule->command('bloodbag:expired')->daily()->dailyAt('00:00');
+        $schedule->command('deferral:temporary-duedate')->daily()->dailyAt('00:00');
     }
 
     /**

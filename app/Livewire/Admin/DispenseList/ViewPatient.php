@@ -26,6 +26,14 @@ class ViewPatient extends Component
     #[On('openModal')]
     public function viewPatient($patient_details_id)
     {
+
+        $donorBloodBagIDs = DispenseList::where('patient_details_id', $patient_details_id)->select('blood_bag_id')->get();
+
+        foreach ($donorBloodBagIDs as $bagId) {
+            $this->bloodBag[] = BloodBag::where('id', $bagId->blood_bag_id)->select('serial_no')->first();
+        }
+        //dd($this->bloodBag);
+
         $this->patient = PatientDetail::where('patient_details.id', $patient_details_id)
         ->leftJoin('blood_types', 'blood_types.id', 'patient_details.blood_type_id')
         ->leftJoin('sexes', 'sexes.id', 'patient_details.sex_id')
@@ -38,11 +46,6 @@ class ViewPatient extends Component
         } else {
             $this->age = null;
         }
-
-        $bloodbag = DispenseList::where('patient_details_id', $patient_details_id)->first(); //change get if multiple
-        $bagId = $bloodbag->blood_bag_id;
-        $this->dispenseDate = $bloodbag->created_at;
-        $this->bloodBag = BloodBag::where('id', $bagId)->first();
     }
 
     public function calculateAge($dob)

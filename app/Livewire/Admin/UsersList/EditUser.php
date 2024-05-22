@@ -9,6 +9,8 @@ use App\Models\Municipality;
 use App\Models\Barangay;
 use App\Models\User;
 use App\Models\MemberDetail;
+use App\Models\AuditTrail;
+
 use Livewire\Attributes\On;
 use Illuminate\Validation\ValidationException;
 
@@ -128,6 +130,26 @@ class EditUser extends Component
             'zip_code' => $this->zip_code,
         ]);
 
+        $ip = file_get_contents('https://api.ipify.org');
+        $ch = curl_init('http://ipwho.is/' . $ip);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HEADER, false);
+        $ipwhois = json_decode(curl_exec($ch), true);
+        curl_close($ch);
+
+        $authUser = auth()->user();
+        AuditTrail::create([
+            'user_id' => $authUser->id,
+            'module_category_id' => 1,
+            'action' => 'Edited details of user_id = ' . $this->userId,
+            'status' => 'Success',
+            'ip_address' => $ipwhois['ip'],
+            'region'     => $ipwhois['region'],
+            'city'       => $ipwhois['city'],
+            'postal'     => $ipwhois['postal'],
+            'latitude'   => $ipwhois['latitude'],
+            'longitude'  => $ipwhois['longitude'],
+        ]);
 
         dd('saved');
     }

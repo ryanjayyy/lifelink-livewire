@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('patient_details', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('first_name');
             $table->string('middle_name');
             $table->string('last_name');
@@ -21,12 +22,15 @@ return new class extends Migration
             $table->unsignedBigInteger('blood_type_id');
             $table->string('diagnosis');
             $table->unsignedBigInteger('hospital_id');
+            $table->timestamp('dispensed_date');
             $table->boolean('status')->default(true);
             $table->timestamps();
 
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('blood_type_id')->references('id')->on('blood_types');
             $table->foreign('hospital_id')->references('id')->on('hospitals');
             $table->foreign('sex_id')->references('id')->on('sexes');
+
         });
     }
 

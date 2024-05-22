@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property int $user_id
@@ -45,7 +45,7 @@ class AuditTrail extends Model
 
     protected $fillable = [
         'user_id',
-        'module',
+        'module_category_id',
         'action',
         'status',
         'ip_address',
@@ -55,4 +55,5 @@ class AuditTrail extends Model
         'latitude',
         'longitude',
     ];
+
 }

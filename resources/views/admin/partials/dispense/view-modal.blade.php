@@ -103,7 +103,23 @@
                                 <h3 class="card-title">Received Blood</h3>
                             </div>
                             <div class="card-body card-scroll h-200px">
-                                <span class="fw-bold fs-6 text-gray-800">{{ $bloodBag->serial_no ?? '' }}</span>
+                                @if ($bloodBag && !empty($bloodBag))
+                                    @foreach ($bloodBag as $collection)
+                                        <!--begin::Input group-->
+                                        <div class="row mb-7">
+                                            <!--begin::Label-->
+                                            <label class="col-lg-4 fw-semibold text-muted">Serial Number</label>
+                                            <!--end::Label-->
+
+                                            <!--begin::Col-->
+                                            <div class="col-lg-8 fv-row">
+                                                <span class="fw-bold fs-6 text-gray-800">{{ $collection->serial_no ?? '' }}
+                                            </div>
+                                            <!--end::Col-->
+                                        </div>
+                                        <!--end::Input group-->
+                                    @endforeach
+                                @endif
                             </div>
                         </div>
 
@@ -133,7 +149,8 @@
 
                                     <!--begin::Col-->
                                     <div class="col-lg-8 fv-row">
-                                        <span class="fw-semibold text-gray-800 fs-6">{{ \Carbon\Carbon::parse($dispenseDate)->format('F j, Y g:i A') ?? '' }}</span>
+                                        <span
+                                            class="fw-semibold text-gray-800 fs-6">{{ \Carbon\Carbon::parse($dispenseDate)->format('F j, Y g:i A') ?? '' }}</span>
                                     </div>
                                     <!--end::Col-->
                                 </div>

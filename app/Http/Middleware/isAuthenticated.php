@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class IsUserMemberMiddleware
+class isAuthenticated
 {
     /**
      * Handle an incoming request.
@@ -15,8 +15,13 @@ class IsUserMemberMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        abort_unless(auth()->user()->isMember(), 403, 'You are not an member.');
-
+        if (auth()->check() ) {
+            if (auth()->user()->role_id === 1) {
+                return redirect()->route('admin.dashboard.dashboard');
+            }else{
+                return redirect()->route('members.dashboard');
+            }
+        }
         return $next($request);
     }
 }

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('audit_trails', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('module');
+            $table->unsignedBigInteger('module_category_id');
             $table->string('action');
             $table->string('status');
             $table->string('ip_address');
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
-
+            $table->foreign('module_category_id')->references('id')->on('module_categories');
         });
     }
 

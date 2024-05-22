@@ -27,7 +27,6 @@ class Login extends Component
         if (Auth::attempt($credentials)) {
             //passed
             $user = Auth::user();
-
             $ip = file_get_contents('https://api.ipify.org');
             $ch = curl_init('http://ipwho.is/' . $ip);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -39,7 +38,7 @@ class Login extends Component
 
                 AuditTrail::create([
                     'user_id'    => $user->id,
-                    'module'     => 'Authentication',
+                    'module_category_id'     => 9,
                     'action'     => 'Logging in to the system',
                     'status'     => 'success',
                     'ip_address' => $ipwhois['ip'],
@@ -54,7 +53,7 @@ class Login extends Component
             } else {
                 AuditTrail::create([
                     'user_id'    => $user->id,
-                    'module'     => 'Authentication',
+                    'module_category_id'     => 9,
                     'action'     => 'Logging in to the system',
                     'status'     => 'failed',
                     'ip_address' => $ipwhois['ip'],

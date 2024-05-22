@@ -15,7 +15,12 @@ class IsUserAdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        abort_unless(auth()->user()->isAdmin(), 403, 'You are not admin.');
+
+        if (!auth()->check() || auth()->user()->role_id !== 1) {
+            auth()->logout();
+            session()->invalidate();
+            return redirect()->route('members.signin');
+        }
         return $next($request);
     }
 }
