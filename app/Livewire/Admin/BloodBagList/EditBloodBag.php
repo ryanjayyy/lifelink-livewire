@@ -9,6 +9,7 @@ use App\Models\BledBy;
 use App\Models\Venue;
 use App\Models\DonationType;
 use App\Models\BloodBag;
+use Illuminate\Support\Facades\Session;
 
 class EditBloodBag extends Component
 {
@@ -120,6 +121,6 @@ class EditBloodBag extends Component
             'donation_type_id' => $this->donationType,
         ]);
 
-        dd("save");
+        dd('saved');
     }
 }

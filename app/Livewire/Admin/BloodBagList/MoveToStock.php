@@ -8,6 +8,8 @@ use Livewire\Attributes\On;
 use App\Models\BloodBag;
 class MoveToStock extends Component
 {
+    public $selectedBagIds = [];
+
     public $bagId;
 
     public function render()
@@ -18,15 +20,25 @@ class MoveToStock extends Component
     #[On('openModal')]
     public function moveToStockModal($bag_id)
     {
-        $this->bagId = $bag_id;
+        $this->selectedBagIds[] = $bag_id;
     }
+
+    #[On('moveSelectedBloodBags')]
+    public function setSelectedIds($ids)
+    {
+        $this->selectedBagIds = $ids;
+
+    }
+
 
     public function moveToStock()
     {
-        $bag = BloodBag::where('id', $this->bagId)->first();
-        $bag->isStored = true;
-        $bag->save();
+        foreach ($this->selectedBagIds as $id) {
+            $bag = BloodBag::where('id', $id)->first();
+            $bag->isStored = true;
+            $bag->save();
+        }
 
-        dd("saved");
+        dd('saved');
     }
 }

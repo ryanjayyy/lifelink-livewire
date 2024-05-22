@@ -183,7 +183,7 @@ class Users extends Table
                             <i class="{$iconClass}"></i>
                         </a>
                         <a wire:click="dispatchId({$value})"
-                            class="btn btn-danger text-white px-3"
+                            class="btn btn-danger text-white px-3{$disabledClass}"
                             data-bs-toggle="modal"
                             data-bs-target="#move-to-deferral"
                             data-bs-placement="bottom"

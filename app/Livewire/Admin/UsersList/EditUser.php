@@ -128,7 +128,7 @@ class EditUser extends Component
             'zip_code' => $this->zip_code,
         ]);
 
-        $this->dispatch('success');
 
+        dd('saved');
     }
 }

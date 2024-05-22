@@ -12,20 +12,33 @@
             </div>
 
             <div class="modal-body">
-                <p class="mb-0 fs-5 text-gray-600">
-                    The 'Move to Stock' option signifies that the blood bag, having
-                    successfully completed the testing phase, is ready for storage. When
-                    this action is done, the blood bag will be transferred to the
-                    inventory module, specifically under the 'Stocks' tab.
-                </p>
-                <p class="fs-6 text-gray-700 mb-7">
-                    Are you sure you want to move this blood bag to stock?
-                </p>
+                @if (!empty($selectedBagIds))
+                    <p class="mb-0 fs-5 text-gray-600">
+                        The 'Move to Stock' option signifies that the blood bag, having
+                        successfully completed the testing phase, is ready for storage. When
+                        this action is done, the blood bag will be transferred to the
+                        inventory module, specifically under the 'Stocks' tab.
+                    </p>
+                    <p class="fs-6 text-gray-700 mb-7">
+                        Are you sure you want to move selected blood bag to stock?
+                    </p>
 
-                <div class="d-flex justify-content-end">
-                    <button type="button" class="btn btn-light-primary me-2" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-primary" wire:click="moveToStock">Move to stock</button>
-                </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-light-primary me-2" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" wire:click="moveToStock">Move to stock</button>
+                    </div>
+                @else
+                    <p class="fs-6 text-gray-700 mb-7">
+                        There is no selected blood bag to move to stock.
+                    </p>
+
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-light-primary me-2" data-bs-dismiss="modal">Close</button>
+                    </div>
+                @endif
+
+
+
             </div>
         </div>
     </div>

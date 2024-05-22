@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Computed;
 use App\Services\Table\Column;
 use App\Enums\Livewire\Table\FilterTypeEnum;
+
 use App\Models\BledBy;
 use App\Models\BloodBag;
 use App\Models\BloodType;
@@ -15,6 +16,9 @@ use App\Models\Venue;
 
 class BloodBags extends Table
 {
+    public $selectedIds = [];
+    public $showButton = false;
+
     public function render()
     {
         return view('admin.pages.blood-bag-list')->extends('layouts.admin');
@@ -92,10 +96,27 @@ class BloodBags extends Table
         foreach (BledBy::all() as $row) {
             $bledby[$row->id] = [
                 'id' => $row->id,
-                'value' => $row->first_name . ' '. $row->middle_name . ' '. $row->last_name
+                'value' => $row->first_name . ' ' . $row->middle_name . ' ' . $row->last_name
             ];
         }
         return [
+            Column::create(
+                'click_id',
+                'click_id',
+                '',
+                FilterTypeEnum::NONE,
+                null,
+                function ($value) {
+                    $bag = BloodBag::where('id', $value)->first();
+                    $isTested = $bag->isTested;
+                    $disabledToStock = $isTested ? '' : ' disabled';
+
+                    return '<div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" value="' . $value . '" wire:click="toggleSelectedId(' . $value . ')" ' . $disabledToStock . '>
+                            </div>';
+                }
+            ),
+
             Column::create(
                 'donor_number',
                 'donor_number',
@@ -230,7 +251,7 @@ class BloodBags extends Table
                             <span class="path2"></span>
                             </i>
                         </a>
-                        <a wire:click="dispatchId({$value})"
+                        <!-- <a wire:click="dispatchId({$value})"
                             class="btn btn-primary text-white px-3{$disabledToStock}"
                             data-bs-toggle="modal"
                             data-bs-target="#blood-bag-move-to-stock-modal"
@@ -241,7 +262,7 @@ class BloodBags extends Table
                             <span class="path2"></span>
                             <span class="path3"></span>
                             </i>
-                        </a>
+                        </a> -->
                         <a wire:click="dispatchId({$value})"
                             class="btn btn-danger text-white px-3{$disabledUnsafe}"
                             data-bs-toggle="modal"
@@ -264,4 +285,27 @@ class BloodBags extends Table
     {
         $this->dispatch('openModal', $user_id);
     }
+
+    public function toggleSelectedId($id)
+    {
+
+        // Check if the ID exists in the array
+        $index = array_search($id, $this->selectedIds);
+
+        if ($index !== false) {
+            // If ID exists, remove it from the array
+            unset($this->selectedIds[$index]);
+            $this->selectedIds = array_values($this->selectedIds);
+        } else {
+            // If ID doesn't exist, add it to the array
+            $this->selectedIds[] = $id;
+        }
+
+    }
+
+    public function bulkMove()
+    {
+        $this->dispatch('moveSelectedBloodBags', $this->selectedIds);
+    }
+
 }

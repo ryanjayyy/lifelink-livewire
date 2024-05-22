@@ -101,7 +101,7 @@ class AddUser extends Component
             'zip_code' => $validatedData['zip_code'],
         ]);
 
-            $this->dispatch('success');
+        dd('saved');
 
     }
 

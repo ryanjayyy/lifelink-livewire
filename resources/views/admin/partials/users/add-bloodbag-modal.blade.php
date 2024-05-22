@@ -13,7 +13,7 @@
 
             <div class="modal-body">
                 @if ($canDonated)
-                    <form wire:submit.prevent='saveBloodBag' class="form">
+                    <form wire:submit.prevent='saveBloodBag'>
                         @csrf
                         <div class="row">
                             <div class="col-12">
@@ -132,7 +132,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" id="add-blood-bag" class="btn btn-primary">Save changes</button>
+                            <button type="submit" id="add-bag" class="btn btn-primary add-bag">Save changes</button>
                         </div>
                     </form>
                 @else
@@ -148,6 +148,4 @@
         </div>
     </div>
 </div>
-
-
 

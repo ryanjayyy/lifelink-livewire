@@ -18,7 +18,7 @@ use App\Models\BadgeType;
 class AddBloodBag extends Component
 {
     public $fullName;
-    public $canDonated = false;
+    public $canDonated = true;
     public $donorLastDonated;
 
     public $userId;
@@ -170,7 +170,8 @@ class AddBloodBag extends Component
             ]);
         }
 
-        $this->dispatch('success');
+        dd('saved');
+
     }
 
     public function getBadgeType($donaQty)

@@ -54,6 +54,7 @@ class RemoveBloodBag extends Component
             $donor->delete();
         }
         $bag->delete();
-        dd("saved");
+
+        dd('saved');
     }
 }

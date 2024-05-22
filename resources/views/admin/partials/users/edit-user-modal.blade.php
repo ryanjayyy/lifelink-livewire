@@ -12,7 +12,7 @@
             </div>
 
             <div class="modal-body">
-                <form wire:submit.prevent="editUser">
+                <form wire:submit.prevent="editUser" id="edit-user-form">
                     @csrf
                     {{-- account-info --}}
 
@@ -215,7 +215,9 @@
                                     class="form-control form-control-solid" placeholder="Province">
                                     <option value="">Select Province</option>
                                     @foreach ($provinceList as $prov)
-                                        <option value="{{ $prov->provCode }}" {{ $prov->provCode == $province ? 'selected' : '' }}>{{ $prov->provDesc }}</option>
+                                        <option value="{{ $prov->provCode }}"
+                                            {{ $prov->provCode == $province ? 'selected' : '' }}>{{ $prov->provDesc }}
+                                        </option>
                                     @endforeach
                                 </select>
                                 <div
@@ -240,7 +242,8 @@
                                     class="form-control form-control-solid" placeholder="Municipality">
                                     <option value="">Select Municipality</option>
                                     @foreach ($municipalityList as $munc)
-                                        <option value="{{ $munc->citymunCode }}" {{ $munc->citymunCode == $municipality ? 'selected' : '' }}>
+                                        <option value="{{ $munc->citymunCode }}"
+                                            {{ $munc->citymunCode == $municipality ? 'selected' : '' }}>
                                             {{ $munc->citymunDesc }}</option>
                                     @endforeach
                                 </select>
@@ -260,7 +263,9 @@
                                     placeholder="Barangay">
                                     <option value="">Select Barangay</option>
                                     @foreach ($barangayList as $brgy)
-                                        <option value="{{ $brgy->brgyCode }}" {{ $brgy->brgyCode == $barangay ? 'selected' : '' }}>{{ $brgy->brgyDesc }}</option>
+                                        <option value="{{ $brgy->brgyCode }}"
+                                            {{ $brgy->brgyCode == $barangay ? 'selected' : '' }}>{{ $brgy->brgyDesc }}
+                                        </option>
                                     @endforeach
                                 </select>
                                 <div
@@ -310,56 +315,11 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" id="edit-user" class="btn btn-primary edit-user">Save changes</button>
+                        <button type="submit" id="edit-user-btn" class="btn btn-primary edit-user">Save
+                            changes</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
-
-<script>
-    const editUserButton = document.getElementById('edit-user');
-    editUserButton.addEventListener('click', e => {
-        e.preventDefault();
-
-        Swal.fire({
-            html: `Are you sure you want to confirm this action?`,
-            icon: "warning",
-            buttonsStyling: false,
-            showCancelButton: true,
-            confirmButtonText: "Ok, got it!",
-            cancelButtonText: 'Nope, cancel it',
-            customClass: {
-                confirmButton: "btn btn-primary edit-user",
-                cancelButton: 'btn btn-danger'
-            }
-        }).then(result => {
-            if (result.isConfirmed) {
-                // Dispatch form submission event only if user confirmed
-                e.target.form.dispatchEvent(new Event('submit', {
-                    bubbles: true,
-                    cancelable: true
-                }));
-            }
-        });
-    });
-
-    // Listen for Livewire events to show the SweetAlert modal after successful form submission
-    document.addEventListener('livewire:init', function () {
-        Livewire.on('success', () => {
-            Swal.fire({
-                text: "User has been updated successfully!",
-                icon: "success",
-                buttonsStyling: false,
-                confirmButtonText: "Ok, got it!",
-                customClass: {
-                    confirmButton: "btn btn-primary edit-user"
-                },
-                didClose: () => {
-                    window.location.href = "{{ route('admin.users.list') }}";
-                }
-            });
-        });
-    });
-</script>

@@ -12,7 +12,7 @@
             </div>
 
             <div class="modal-body">
-                <form wire:submit.prevent='addToDeferralList' class="form">
+                <form wire:submit.prevent='addToDeferralList' class="form" id="move-to-deferral-form">
                     @csrf
                     <div class="row">
                         <div class="col-12">
@@ -128,10 +128,11 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" id="move-to-deferral" class="btn btn-primary">Save changes</button>
+                        <button type="submit" id="move-to-deferral-btn" class="btn btn-primary">Save changes</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
