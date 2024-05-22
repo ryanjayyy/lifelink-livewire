@@ -127,51 +127,54 @@
 
             <!--begin::Table body-->
             <tbody class="fw-bold text-gray-600 overflow-y-auto">
-                @if ($donorDetails && $donorDetails->isNotEmpty())
-                    @foreach ($donorDetails as $donorDetail)
-                        <tr>
-                            <!--begin::Item-->
-                            <td>
-                                <span
-                                    class="text-gray-900 text-hover-primary">{{ $donorDetail->serial_no ?? '' }}</span>
-                            </td>
-                            <!--end::Item-->
+                @if ($donorDetails && !empty($donorDetails))
+                    @foreach ($donorDetails as $collection)
+                        @foreach ($collection as $donorDetail)
+                            <tr>
+                                <!--begin::Item-->
+                                <td>
+                                    <span
+                                        class="text-gray-900 text-hover-primary">{{ $donorDetail->serial_no ?? '' }}</span>
+                                </td>
+                                <!--end::Item-->
 
-                            <!--begin::Product ID-->
-                            <td class="text-end">
-                                {{ $donorDetail->first_name ?? '' }} {{ $donorDetail->last_name ?? '' }}
-                            </td>
-                            <!--end::Product ID-->
+                                <!--begin::Product ID-->
+                                <td class="text-end">
+                                    {{ $donorDetail->first_name ?? '' }} {{ $donorDetail->last_name ?? '' }}
+                                </td>
+                                <!--end::Product ID-->
 
-                            <!--begin::Date added-->
-                            <td class="text-end" data-order="2024-04-20T00:00:00+08:00">
-                                {{ $donorDetail->blood_type ?? '' }}
-                            </td>
-                            <!--end::Date added-->
+                                <!--begin::Date added-->
+                                <td class="text-end" data-order="2024-04-20T00:00:00+08:00">
+                                    {{ $donorDetail->blood_type ?? '' }}
+                                </td>
+                                <!--end::Date added-->
 
-                            <!--begin::Price-->
-                            <td class="text-end dt-type-numeric">
-                                {{ $donorDetail->date_donated ?? '' }}
-                            </td>
-                            <!--end::Price-->
+                                <!--begin::Price-->
+                                <td class="text-end dt-type-numeric">
+                                    {{ $donorDetail->date_donated ?? '' }}
+                                </td>
+                                <!--end::Price-->
 
-                            <!--begin::Status-->
-                            <td class="text-end dt-type-numeric">
-                                {{ $donorDetail->venue ?? '' }}
-                            </td>
-                            <!--end::Status-->
+                                <!--begin::Status-->
+                                <td class="text-end dt-type-numeric">
+                                    {{ $donorDetail->venue ?? '' }}
+                                </td>
+                                <!--end::Status-->
 
-                            <!--begin::Qty-->
-                            <td class="text-end dt-type-numeric" data-order="58">
-                                <span class="text-gray-900 fw-bold">
-                                    {{ $donorDetail->bled_by_first_name ?? '' }}
-                                    {{ $donorDetail->bled_by_middle_name ?? '' }}
-                                    {{ $donorDetail->bled_by_last_name ?? '' }}
-                                </span>
-                            </td>
-                            <!--end::Qty-->
-                        </tr>
+                                <!--begin::Qty-->
+                                <td class="text-end dt-type-numeric" data-order="58">
+                                    <span class="text-gray-900 fw-bold">
+                                        {{ $donorDetail->bled_by_first_name ?? '' }}
+                                        {{ $donorDetail->bled_by_middle_name ?? '' }}
+                                        {{ $donorDetail->bled_by_last_name ?? '' }}
+                                    </span>
+                                </td>
+                                <!--end::Qty-->
+                            </tr>
+                        @endforeach
                     @endforeach
+
                 @endif
 
             </tbody>

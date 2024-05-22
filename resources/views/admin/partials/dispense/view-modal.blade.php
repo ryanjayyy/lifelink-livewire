@@ -100,7 +100,7 @@
                     <div class="d-flex justify-content-between w-100 ">
                         <div class="card bg-light shadow-sm w-100 mx-3">
                             <div class="card-header">
-                                <h3 class="card-title">Donated Blood</h3>
+                                <h3 class="card-title">Received Blood</h3>
                             </div>
                             <div class="card-body card-scroll h-200px">
                                 <span class="fw-bold fs-6 text-gray-800">{{ $bloodBag->serial_no ?? '' }}</span>

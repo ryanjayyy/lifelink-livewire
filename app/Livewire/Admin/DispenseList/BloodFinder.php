@@ -32,8 +32,7 @@ class BloodFinder extends Component
     public function serialInput()
     {
         $this->findSerial($this->searchSerial);
-        if ($this->searchSerial == '')
-        {
+        if ($this->searchSerial == '') {
             $this->patientDetails = null;
         }
     }
@@ -54,29 +53,34 @@ class BloodFinder extends Component
     {
         $bag = BloodBag::where('serial_no', $serialNumber)->where('isUsed', true)->first();
         $bagId = $bag->id ? $bag->id : 0;
-        $userId = $bag->user_id;
-
-        $this->donorDetails = MemberDetail::where('member_details.user_id', $userId)
-            ->select([
-                'member_details.first_name',
-                'member_details.middle_name',
-                'member_details.last_name',
-                'blood_bags.serial_no',
-                'blood_bags.date_donated',
-                'blood_types.blood_type',
-                'venues.name as venue',
-                'bled_by.first_name as bled_by_first_name',
-                'bled_by.middle_name as bled_by_middle_name',
-                'bled_by.last_name as bled_by_last_name',
-            ])
-            ->leftJoin('blood_bags', 'blood_bags.user_id', 'member_details.user_id')
-            ->leftJoin('venues', 'venues.id', 'blood_bags.venue_id')
-            ->leftJoin('bled_by', 'bled_by.id', 'blood_bags.bled_by_id')
-            ->leftJoin('blood_types', 'blood_types.id', 'member_details.blood_type_id')
-            ->get();
-
         $patient = DispenseList::where('blood_bag_id', $bagId)->first();
         $patientId = $patient->patient_details_id;
+
+        $donorBloodBagIDs = DispenseList::where('patient_details_id', $patientId)->select('blood_bag_id')->get();
+        foreach ($donorBloodBagIDs as $bagId) {
+            $userId = BloodBag::where('id', $bagId->blood_bag_id)->select('user_id')->first();
+
+            $this->donorDetails[] = MemberDetail::where('member_details.user_id', $userId->user_id)
+                ->select([
+                    'member_details.first_name',
+                    'member_details.middle_name',
+                    'member_details.last_name',
+                    'blood_bags.serial_no',
+                    'blood_bags.date_donated',
+                    'blood_types.blood_type',
+                    'venues.name as venue',
+                    'bled_by.first_name as bled_by_first_name',
+                    'bled_by.middle_name as bled_by_middle_name',
+                    'bled_by.last_name as bled_by_last_name',
+                ])
+                ->leftJoin('blood_bags', 'blood_bags.user_id', 'member_details.user_id')
+                ->leftJoin('venues', 'venues.id', 'blood_bags.venue_id')
+                ->leftJoin('bled_by', 'bled_by.id', 'blood_bags.bled_by_id')
+                ->leftJoin('blood_types', 'blood_types.id', 'member_details.blood_type_id')
+                ->get();
+
+        }
+         //dd($this->donorDetails);
 
         $this->patientDetails = PatientDetail::where('patient_details.id', $patientId)
             ->leftJoin('blood_types', 'blood_types.id', 'patient_details.blood_type_id')

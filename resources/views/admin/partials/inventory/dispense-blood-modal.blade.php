@@ -29,7 +29,7 @@
                         </div>
                     </form>
                 @else
-                    <<!--begin::Alert-->
+                    <!--begin::Alert-->
                         <div
                             class="alert alert-dismissible bg-light-danger d-flex flex-center flex-column py-10 px-10 px-lg-20 mb-10">
 
