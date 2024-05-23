@@ -15,11 +15,12 @@ class isAuthenticated
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth()->check() ) {
-            if (auth()->user()->role_id === 1) {
+        if (auth()->check()) {
+            $user = auth()->user();
+            if ($user->role_id === 1 && !$request->routeIs('admin.dashboard.dashboard')) {
                 return redirect()->route('admin.dashboard.dashboard');
-            }else{
-                return redirect()->route('members.dashboard');
+            } elseif ($user->role_id === 2 && !$request->routeIs('members.dashboard.dashboard')) {
+                return redirect()->route('members.dashboard.dashboard');
             }
         }
         return $next($request);

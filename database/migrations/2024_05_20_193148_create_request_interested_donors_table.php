@@ -13,11 +13,13 @@ return new class extends Migration
     {
         Schema::create('request_interested_donors', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('admin_post_id');
             $table->unsignedBigInteger('blood_request_id');
             $table->unsignedBigInteger('user_id');
             $table->boolean('status')->default(true);
             $table->timestamps();
 
+            $table->foreign('admin_post_id')->references('id')->on('admin_posts');
             $table->foreign('blood_request_id')->references('id')->on('blood_requests');
             $table->foreign('user_id')->references('id')->on('users');
         });

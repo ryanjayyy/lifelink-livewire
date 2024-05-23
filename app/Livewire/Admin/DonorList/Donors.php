@@ -92,7 +92,7 @@ class Donors extends Table
         }
 
         $badgeType = [];
-        foreach( BadgeType::all() as $row) {
+        foreach (BadgeType::all() as $row) {
             $badgeType[$row->id] = [
                 'id' => $row->id,
                 'value' => $row->type
@@ -100,7 +100,7 @@ class Donors extends Table
         }
 
         $donorType = [];
-        foreach( DonorType::all() as $row) {
+        foreach (DonorType::all() as $row) {
             $donorType[$row->id] = [
                 'id' => $row->id,
                 'value' => $row->type
@@ -128,7 +128,7 @@ class Donors extends Table
 
             Column::create(
                 'full_name',
-                'Full Name',
+                'full_name',
                 'Name',
                 FilterTypeEnum::STRING,
                 null,

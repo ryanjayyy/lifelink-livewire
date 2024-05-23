@@ -39,13 +39,14 @@
             <!--begin::Page-->
             <div class="app-page flex-column flex-column-fluid" id="kt_app_page">
                 <!--begin::Header-->
-                @include('pos.includes.header')
+                @include('members.includes.header')
                 <!--end::Header-->
                 <!--begin::Wrapper-->
                 <div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
                     <!--begin::Wrapper container-->
                     <div class="app-container container-fluid d-flex flex-grow-1">
-                        @include('pos.includes.sidebar')
+                        @include('members.includes.sidebar')
+
                         <!--begin::Main-->
                         <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
                             <!--begin::Content wrapper-->
@@ -56,7 +57,7 @@
                             </div>
                             <!--end::Content wrapper-->
                             <!--begin::Footer-->
-                            @include('admin.includes.footer')
+                            @include('members.includes.footer')
                             <!--end::Footer-->
                         </div>
                         <!--end:::Main-->
@@ -69,7 +70,6 @@
         </div>
     </div>
     <!--end::Root-->
-    <script src="{{ mix('mix/js/app.js') }}" type="text/javascript"></script>
     @yield('page-scripts')
 </body>
 <!--end::Body-->

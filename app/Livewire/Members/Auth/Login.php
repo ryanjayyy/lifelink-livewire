@@ -63,7 +63,7 @@ class Login extends Component
                     'latitude'   => $ipwhois['latitude'],
                     'longitude'  => $ipwhois['longitude'],
                 ]);
-                return redirect()->route('members.dashboard');
+                return redirect()->route('members.dashboard.dashboard');
             }
         } else {
             //failed

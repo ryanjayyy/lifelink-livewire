@@ -5,7 +5,7 @@
 <head>
     <base href="" />
     <title>LifeLink | @yield('title')</title>
-    @include('base.includes.head')
+    @include('base.includes.headadmin')
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -39,7 +39,7 @@
             <!--begin::Page-->
             <div class="app-page flex-column flex-column-fluid" id="kt_app_page">
                 <!--begin::Header-->
-                @include('members.includes.header')
+                @include('admin.includes.header')
                 <!--end::Header-->
                 <!--begin::Wrapper-->
                 <div class="app-wrapper flex-column flex-row-fluid" id="kt_app_wrapper">
@@ -56,7 +56,7 @@
                             </div>
                             <!--end::Content wrapper-->
                             <!--begin::Footer-->
-                            @include('members.includes.footer')
+                            @include('admin.includes.footer')
                             <!--end::Footer-->
                         </div>
                         <!--end:::Main-->

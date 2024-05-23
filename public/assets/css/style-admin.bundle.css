@@ -49651,7 +49651,7 @@ body {
     .app-sidebar {
         display: flex;
         flex-shrink: 0;
-        width: 200px;
+        width: var(--bs-app-sidebar-width);
         margin-left: 0;
         margin-right: 0;
         margin-top: 0;

@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Logout;
 use App\Http\Middleware\isAuthenticated;
 use App\Http\Middleware\IsUserAdminMiddleware;
+use App\Http\Middleware\isUserMemberMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Admin\UsersList\Users;
 use App\Livewire\Admin\DonorList\Donors;
@@ -18,13 +20,16 @@ use App\Livewire\Admin\DispenseList\BloodFinder;
 use App\Livewire\Admin\DispenseList\DispenseList;
 use App\Livewire\Admin\DisposeBloodBags\BagList;
 use App\Livewire\Admin\Network\BloodRequest;
+use App\Livewire\Admin\Network\CreatedPost;
 use App\Livewire\Admin\AuditTrail\Log;
+use App\Livewire\Members\Dashboard\Main as MemberMain;
 
 //member
 use App\Livewire\Members\Auth\Login;
 use App\Livewire\Members\Auth\RegisterStepOne;
 use App\Livewire\Members\Auth\RegisterStepTwo;
 use App\Livewire\Members\Auth\EmailVerification;
+use App\Livewire\Members\BloodNetwork\Request;
 
 
 Route::prefix('/admin')->name('admin.')->middleware([IsUserAdminMiddleware::class])->group(function () {
@@ -78,6 +83,7 @@ Route::prefix('/admin')->name('admin.')->middleware([IsUserAdminMiddleware::clas
 
     Route::prefix('/network')->name('network.')->group(function () {
         Route::get('/blood-request', BloodRequest::class)->name('blood-request');
+        Route::get('/create-post', CreatedPost::class)->name('posts');
     });
 
     Route::prefix('/activity-log')->name('activity-log.')->group(function () {
@@ -89,9 +95,21 @@ Route::prefix('/admin')->name('admin.')->middleware([IsUserAdminMiddleware::clas
 
 
 //public routes
+Route::get('/logout', [Logout::class, 'logout'])->name('logout');
 Route::prefix('/')->name('members.')->middleware(isAuthenticated::class)->group(function () {
     Route::get('/signin', Login::class)->name('signin');
     Route::get('/signup/step-1', RegisterStepOne::class)->name('signup-1');
     Route::get('/signup/step-2', RegisterStepTwo::class)->name('signup-2');
     Route::get('/email/verify', EmailVerification::class)->name('signup-verify');
+});
+
+
+
+Route::prefix('/members')->name('members.')->middleware('auth')->group(function () {
+    Route::prefix('/dashboard')->name('dashboard.')->group(function () {
+        Route::get('/', MemberMain::class)->name('dashboard');
+    });
+    Route::prefix('/blood-network')->name('blood-network.')->group(function () {
+        Route::get('/request', Request::class)->name('request');
+    });
 });

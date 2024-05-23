@@ -56,7 +56,7 @@ class Log extends Table
 
     public function canExport(): bool
     {
-        return true;
+        return false;
     }
 
     #[Computed]
