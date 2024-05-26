@@ -10,6 +10,8 @@ use App\Models\Barangay;
 use App\Models\User;
 use App\Models\MemberDetail;
 use App\Models\AuditTrail;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\RegistrationMail;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\App;
@@ -103,6 +105,7 @@ class AddUser extends Component
             'street' => $validatedData['street'],
             'zip_code' => $validatedData['zip_code'],
         ]);
+        Mail::to($validatedData['email'])->send(new RegistrationMail($memberAccount));
 
         $ip = file_get_contents('https://api.ipify.org');
         $ch = curl_init('http://ipwho.is/' . $ip);
@@ -112,6 +115,7 @@ class AddUser extends Component
         curl_close($ch);
 
         $authUser = auth()->user();
+
         AuditTrail::create([
             'user_id' => $authUser->id,
             'module_category_id' => 1,
@@ -125,8 +129,8 @@ class AddUser extends Component
             'longitude'  => $ipwhois['longitude'],
         ]);
 
-        dd('saved');
 
+        dd('saved');
     }
 
     public function getProvinceList()

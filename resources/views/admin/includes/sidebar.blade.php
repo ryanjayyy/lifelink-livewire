@@ -178,6 +178,20 @@
                     <!--end::Nav link-->
                 </li>
                 <!--end::Nav item-->
+                <!--begin::Nav item-->
+                <li class="nav-item mb-2" data-bs-toggle="tooltip" data-bs-trigger="hover" title="Activity Log">
+                    <!--begin::Nav link-->
+                    <a href="{{ route('admin.settings.categories') }}"
+                        class="nav-link btn btn-icon btn-active-info btn-color-gray-600 {{ Route::is('admin.settings.categories') ? 'active' : 'nav-item' }}"
+                        wire:navigate data-bs-toggle="tab">
+                        <i class="ki-duotone ki-setting-2 fs-2qx">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>
+                    </a>
+                    <!--end::Nav link-->
+                </li>
+                <!--end::Nav item-->
             </div>
         </ul>
         <!--end::Nav-->

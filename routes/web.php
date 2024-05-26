@@ -23,6 +23,8 @@ use App\Livewire\Admin\Network\BloodRequest;
 use App\Livewire\Admin\Network\CreatedPost;
 use App\Livewire\Admin\AuditTrail\Log;
 use App\Livewire\Members\Dashboard\Main as MemberMain;
+use App\Livewire\Admin\Settings\Category;
+
 
 //member
 use App\Livewire\Members\Auth\Login;
@@ -30,6 +32,7 @@ use App\Livewire\Members\Auth\RegisterStepOne;
 use App\Livewire\Members\Auth\RegisterStepTwo;
 use App\Livewire\Members\Auth\EmailVerification;
 use App\Livewire\Members\BloodNetwork\Request;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 
 Route::prefix('/admin')->name('admin.')->middleware([IsUserAdminMiddleware::class])->group(function () {
@@ -89,6 +92,10 @@ Route::prefix('/admin')->name('admin.')->middleware([IsUserAdminMiddleware::clas
     Route::prefix('/activity-log')->name('activity-log.')->group(function () {
         Route::get('/list', Log::class)->name('list');
     });
+
+    Route::prefix('/settings')->name('settings.')->group(function () {
+        Route::get('/', Category::class)->name('categories');
+    });
 });
 
 
@@ -96,6 +103,14 @@ Route::prefix('/admin')->name('admin.')->middleware([IsUserAdminMiddleware::clas
 
 //public routes
 Route::get('/logout', [Logout::class, 'logout'])->name('logout');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect('/signin');
+})->middleware(['signed'])->name('verification.verify');
+
+
 Route::prefix('/')->name('members.')->middleware(isAuthenticated::class)->group(function () {
     Route::get('/signin', Login::class)->name('signin');
     Route::get('/signup/step-1', RegisterStepOne::class)->name('signup-1');

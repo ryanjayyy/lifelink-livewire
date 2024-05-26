@@ -151,6 +151,7 @@ class EditUser extends Component
             'longitude'  => $ipwhois['longitude'],
         ]);
 
-        dd('saved');
+        return back()->with('success', 'Profile updated successfully')
+            ->with('redirect', 'admin.users.list');
     }
 }

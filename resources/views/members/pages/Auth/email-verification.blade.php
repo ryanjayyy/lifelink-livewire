@@ -3,20 +3,49 @@
 @endsection
 
 <!--begin::Root-->
-<div class="d-flex flex-column flex-root" id="kt_app_root">
-    <!--begin::Authentication - Sign-in -->
-    <div class="d-flex flex-column flex-lg-row flex-column-fluid bg-gray-200">
-        <!--begin::Body-->
-        <div class="d-flex flex-column flex-lg-row-fluid w-lg-50 p-10 order-2 order-lg-1">
-            check your email to verify.
+<div class="d-flex flex-column flex-root bg-gray-300" id="kt_app_root">
+    <div class="d-flex flex-column flex-center flex-column-fluid">
+        <!--begin::Content-->
+        <div class="d-flex flex-column flex-center text-center p-10">
+            <!--begin::Wrapper-->
+            <div class="card card-flush w-lg-650px py-5">
+                <div class="card-body py-15 py-lg-20">
 
-            <div class="d-flex flex-column flex-lg-row-fluid w-lg-50 p-10 order-2 order-lg-1">
-                <button id="resendButton" class="resendButton">resend</button>
-                <span id="countdown" style="display: none;"></span>
+                    <!--begin::Logo-->
+                    <div class="mb-14">
+                        <a href="/metronic8/demo51/index.html" class="">
+                            <img alt="Logo" src="{{ asset('assets/media/logos/Lifelink-logo.png') }}" class="h-40px">
+                        </a>
+                    </div>
+                    <!--end::Logo-->
+
+                    <!--begin::Title-->
+                    <h1 class="fw-bolder text-gray-900 mb-5">
+                        Verify your email
+                    </h1>
+                    <!--end::Title-->
+
+                    <!--begin::Link-->
+                    <div class="mb-11">
+                        <button wire:click='resend' id="resendButton" class="resendButton btn btn-sm btn-primary">Resend Email Verification</button>
+                        <span id="countdown" style="display: none;"></span>
+                    </div>
+                    <!--end::Link-->
+
+                    <!--begin::Illustration-->
+                    <div class="mb-0">
+                        <img src="{{ asset('assets/media/auth/verify-email.png') }}"
+                            class="mw-100 mh-300px theme-light-show" alt="">
+                    </div>
+                    <!--end::Illustration-->
+
+                </div>
             </div>
+            <!--end::Wrapper-->
         </div>
+        <!--end::Content-->
     </div>
-    <!--end::Authentication - Sign-in-->
+
 </div>
 <!--end::Root-->
 
@@ -35,10 +64,10 @@
                 if (count <= 0) {
                     clearInterval(timer);
                     resendButton.disabled = false;
-                    resendButton.innerText = 'resend';
+                    resendButton.innerText = 'Resend Email Verification';
                     countdownElement.style.display = 'none';
                 } else {
-                    resendButton.innerText = 'resend email verification in ' + count;
+                    resendButton.innerText = 'Resend Email Verification in ' + count;
                 }
             }, 1000);
         }

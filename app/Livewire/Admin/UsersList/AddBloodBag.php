@@ -15,12 +15,15 @@ use App\Models\User;
 use App\Models\DonorList;
 use App\Models\BadgeType;
 use App\Models\AuditTrail;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\RegistrationMail;
 
 class AddBloodBag extends Component
 {
     public $fullName;
     public $canDonated = true;
     public $donorLastDonated;
+    public $user;
 
     public $userId;
     public $serialOne;
@@ -52,6 +55,7 @@ class AddBloodBag extends Component
     {
         $this->userId = $user_id;
         $donor = MemberDetail::where('id', $user_id)->first();
+        $this->user = User::where('id', $user_id)->first();
         $this->checkLastDateDonated($user_id);
 
         $this->fullName = $donor->first_name . ' ' . $donor->middle_name . ' ' . $donor->last_name;
@@ -180,6 +184,8 @@ class AddBloodBag extends Component
         curl_close($ch);
 
         $authUser = auth()->user();
+        Mail::to($this->user->email)->send(new RegistrationMail($this->user));
+
         AuditTrail::create([
             'user_id' => $authUser->id,
             'module_category_id' => 1,
@@ -192,6 +198,8 @@ class AddBloodBag extends Component
             'latitude'   => $ipwhois['latitude'],
             'longitude'  => $ipwhois['longitude'],
         ]);
+
+
 
         dd('saved');
 

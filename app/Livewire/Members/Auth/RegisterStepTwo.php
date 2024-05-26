@@ -96,6 +96,10 @@ class RegisterStepTwo extends Component
             'unhash_password' =>$unhash_password,
         ]);
 
+        session([
+            'user_id' => $memberAccount->id,
+        ]);
+
         do {
             $donorNumber = rand(10000000, 99999999);
         } while (MemberDetail::where('donor_number', $donorNumber)->exists());
@@ -116,6 +120,8 @@ class RegisterStepTwo extends Component
             'street' => ucwords($validatedData['street']),
             'zip_code' => $validatedData['zip_code'],
         ]);
+
+        $memberAccount->sendEmailVerificationNotification();
 
         session()->forget(['email', 'mobile', 'password','unhash_password']);
         return redirect()->route('members.signup-verify');

@@ -6,6 +6,11 @@ use Livewire\Component;
 
 use App\Models\BloodRequest;
 use App\Models\BloodComponent;
+use App\Models\RequestInterestedDonor;
+use App\Models\Barangay;
+use App\Models\Municipality;
+use App\Models\Province;
+use App\Models\Region;
 
 class Request extends Component
 {
@@ -18,6 +23,9 @@ class Request extends Component
 
     public $bloodComponentList;
     public $latestRequest;
+    public $scheduleReminder;
+    public $venueAddress;
+
 
     public function mount()
     {
@@ -25,7 +33,29 @@ class Request extends Component
         $this->userId = $user->id;
         $this->bloodComponentList = BloodComponent::all();
         $this->latestRequest = $this->getLatestRequest($user->id);
-        //dd($this->latestRequest);
+
+        $this->scheduleReminder = RequestInterestedDonor::where('user_id', $user->id)
+            ->leftJoin('admin_posts', 'admin_posts.id', '=', 'request_interested_donors.admin_post_id')
+            ->leftJoin('venues', 'venues.id', '=', 'admin_posts.venue_id')
+            ->where('admin_posts.status', true)
+            ->latest('request_interested_donors.created_at')
+            ->first();
+
+        if ($this->scheduleReminder) {
+            $barangay = Barangay::where('brgyCode', $this->scheduleReminder->barangay)->select('brgyDesc')->first();
+            $barangayDesc = $barangay ? $barangay->brgyDesc : '';
+
+            $municipality = Municipality::where('citymunCode', $this->scheduleReminder->municipality)->select('citymunDesc')->first();
+            $municipalityDesc = $municipality ? $municipality->citymunDesc : '';
+
+            $province = Province::where('provCode', $this->scheduleReminder->province)->select('provDesc')->first();
+            $provinceDesc = $province ? $province->provDesc : '';
+
+            $region = Region::where('regCode', $this->scheduleReminder->region)->select('regDesc')->first();
+            $regDesc = $region ? $region->regDesc : '';
+
+            $this->venueAddress = "{$regDesc}, {$provinceDesc}, {$municipalityDesc}, {$barangayDesc}";
+        }
     }
 
     public function render()
@@ -91,4 +121,6 @@ class Request extends Component
             ->latest()
             ->first();
     }
+
+
 }

@@ -1,5 +1,5 @@
 @section('title')
-    {{ 'Blood Request List' }}
+    {{ 'Network' }}
 @endsection
 
 <div class="w-100">
@@ -34,8 +34,8 @@
         <!--end::Col-->
 
         <!--begin::Col-->
-        <div class="col-xl-8">
-            @include('members.partials.network.admin-posts')
+        <div wire:ignore.self class="col-xl-8">
+            @livewire('Members\BloodNetwork\AdminPost')
         </div>
         <!--end::Col-->
     </div>
